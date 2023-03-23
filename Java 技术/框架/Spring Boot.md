@@ -116,7 +116,9 @@ class SpringBootTestApplicationTests {
 完成后，直接运行项目主类，就可以直接访问：http://localhost:8080/<br>
 由于没有编写任何的请求映射，所以没有数据。
 
-![初次运行 Spring Boot 项目](blob/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%20Boot/%E5%88%9D%E6%AC%A1%E8%BF%90%E8%A1%8C%20Spring%20Boot%20%E9%A1%B9%E7%9B%AE.png)
+![初次运行 Spring Boot 项目](/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%20Boot/%E5%88%9D%E6%AC%A1%E8%BF%90%E8%A1%8C%20Spring%20Boot%20%E9%A1%B9%E7%9B%AE.png)
+
+![初次运行 Spring Boot 项目](https://github.com/DoubleZHE/mine/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%20Boot/%E5%88%9D%E6%AC%A1%E8%BF%90%E8%A1%8C%20Spring%20Boot%20%E9%A1%B9%E7%9B%AE.png)
 
 Spring Boot 日志中除了最基本的 SpringBoot 启动日志以外，还新增了内嵌 Web 服务器（Tomcat）的启动日志，并且显示了当前 Web 服务器所开放的端口，并且自动帮助初始化了DispatcherServlet，但是只创建了项目，导入了 web 相关的 starter 依赖，没有进行任何的配置，实际上它使用的是 starter 提供的默认配置进行初始化的。
 
