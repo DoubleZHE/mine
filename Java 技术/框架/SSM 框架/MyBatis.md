@@ -64,7 +64,7 @@ MyBatis 官网地址：https://mybatis.org/mybatis-3/
 
 2. 创建 user 数据表
 
-![](R:/ImageRepository/MyBatis/202111181427984.png)
+![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111181427984.png)
 
 3. 编写 User 实体类
 
@@ -181,7 +181,7 @@ public void test1() throws IOException {
 
 ## 三、MyBatis 的映射文件概述
 
-![](R:/ImageRepository/MyBatis/202111181436761.png)
+![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111181436761.png)
 
 ### MyBatis 映射器的主要元素
 
@@ -400,7 +400,7 @@ public void delete() throws IOException {
 
 #### environments 标签
 
-![](R:/ImageRepository/MyBatis/202111181616112.png)
+![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111181616112.png)
 
 事务管理器（transactionManager）类型有两种：
 
@@ -425,17 +425,17 @@ public void delete() throws IOException {
 
 实际开发中，习惯将数据源的配置信息单独抽取成一个 properties 文件，该标签可以加载额外配置的 properties 文件
 
-![](R:/ImageRepository/MyBatis/202111181824226.png)
+![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111181824226.png)
 
-![](R:/ImageRepository/MyBatis/202111181836938.png)
+![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111181836938.png)
 
 #### typeAliases 标签
 
-![](R:/ImageRepository/MyBatis/202111181835679.png)
+![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111181835679.png)
 
 MyBatis 框架已经为我们设置好了一些常用的类型的别名
 
-![](R:/ImageRepository/MyBatis/202111181841864.png)
+![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111181841864.png)
 
 ---
 
@@ -552,7 +552,7 @@ Mapper 接口开发需要遵循以下规范：
 
 #### 2.2 编写 UserMapper 接口
 
-![](R:/ImageRepository/MyBatis/202111182146973.png)
+![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111182146973.png)
 
 #### 2.3 测试代理方式
 
@@ -631,7 +631,7 @@ condition.setUsername("张三");
 condition.setPassword("123");
 ```
 
-![](R:/ImageRepository/MyBatis/202111201922395.png)
+![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111201922395.png)
 
 当查询条件只有id存在时，控制台打印的sql语句如下：
 
@@ -644,7 +644,7 @@ User condition = new User();
 condition.setId(1);
 ```
 
-![image-20211120192321819](R:/ImageRepository/MyBatis/202111201923882.png)
+![image-20211120192321819](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111201923882.png)
 
 #### 1.3 动态 SQL 之 `<foreach>`
 
@@ -680,7 +680,7 @@ List<User> userList = mapper.findByID(idList);
 System.out.println(userList);
 ```
 
-![image-20211120194844054](R:/ImageRepository/MyBatis/202111201948227.png)
+![image-20211120194844054](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111201948227.png)
 
 `<foreach>` 标签用于遍历集合。属性含义：
 
@@ -731,7 +731,7 @@ Mapper.xml 文件中可将重复的 SQL 抽取出来，使用时用 `<include>` 
 
 无论是 MyBatis 在预处理语句（PreparedStatement）中设置一个参数时，还是从结果集中取出一个值时，都会用类型处理器将获取的值以合适的方式转换成 Java 类型。下表描述了一些默认的类型处理器（截取部分）。
 
-![image-20211120200322734](R:/ImageRepository/MyBatis/202111202003842.png)
+![image-20211120200322734](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111202003842.png)
 
 你可以重写类型处理器或创建你自己的类型处理器来处理不支持的或非标准的类型。具体做法为：实现 org.apache.ibatis.type.TypeHandler 接口，或继承一个很便利的类 org.apache.ibatis.type.BaseTypeHandler，然后可以选择性地将它映射到一个 JDBC 类型。例如需求：一个 Java 中的 Date 数据类型，我想将之存到数据库的时候存成一个 1970 年至今的毫秒数，取出来时转换成 java 的 Date，即 java 的 Date 与数据库的 varchar 毫秒值之间转换。
 
@@ -838,7 +838,7 @@ public void testSelect() throws IOException {
 
 >数据库数据：
 >
->![](R:/ImageRepository/MyBatis/202111202120054.png)
+>![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111202120054.png)
 >
 >测试查询操作结果：
 >
@@ -954,7 +954,7 @@ public void testSelectAll() throws IOException {
 用户表和订单表的关系为，一个用户有多个订单，一个订单只从属于一个用户
 一对一查询的的需求：查询一个订单，与此同时查询出该订单所属的用户
 
-![](R:/ImageRepository/MyBatis/202111211020360.png)
+![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111211020360.png)
 
 #### 1.2 订单环境搭建
 
@@ -1033,7 +1033,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 >`select order.*, user.username, user.password from order,user where order.uid = user.id;`
 >
 >查询结果：
->![](R:/ImageRepository/MyBatis/202111211216084.png)
+>![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111211216084.png)
 
 b> 创建 user、order 实体类
 User.java
@@ -1208,7 +1208,7 @@ public void testOrderMap() throws IOException {
 
 >结果：
 >
->![](R:/ImageRepository/MyBatis/202111211249209.png)
+>![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111211249209.png)
 
 ### 2. 一对多查询
 
@@ -1217,13 +1217,13 @@ public void testOrderMap() throws IOException {
 用户表和订单表的关系为，一个用户有多个订单，一个订单只从属于一个用户
 一对多查询的需求：查询一个用户，与此同时查询出该用户具有的订单
 
-![](R:/ImageRepository/MyBatis/202111211308926.png)
+![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111211308926.png)
 
 >一对多查询 SQL 语句：
 >`SELECT user.*, order.id AS oid, order.ordertime, order.total FROM user, order WHERE user.id = order.uid`
 >
 >查询的结果如下：
->![](R:/ImageRepository/MyBatis/202111211349660.png)
+>![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111211349660.png)
 
 #### 2.2 实现步骤
 
@@ -1345,7 +1345,7 @@ public void testUserMap() {
 ```
 
 >测试结果：
->![](R:/ImageRepository/MyBatis/202111211412592.png)
+>![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111211412592.png)
 
 ### 3. 多对多查询
 
@@ -1353,12 +1353,12 @@ public void testUserMap() {
 
 用户表和角色表的关系为，一个用户有多个角色，一个角色被多个用户使用
 多对多查询的需求：查询用户同时查询出该用户的所有角色
-![](R:/ImageRepository/MyBatis/202111211414462.png)
+![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111211414462.png)
 
 >多对多查询语句：
 >`SELECT user.*, role.rolename, role.roleDesc FROM user, user_role, role WHERE user.id = user_role.user_id AND role.id = user_role.role_id;`
 >查询得到的结果：
->![](R:/ImageRepository/MyBatis/202111211449424.png)
+>![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111211449424.png)
 
 #### 3.2 实现步骤
 
@@ -1598,7 +1598,7 @@ public void testRole() {
 ```
 
 >测试结果：
->![](R:/ImageRepository/MyBatis/202111211603352.png)
+>![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111211603352.png)
 
 
 ### 4. 知识小结
@@ -1731,13 +1731,13 @@ public void testFindAll() {
 用户表和订单表的关系为，一个用户有多个订单，一个订单只从属于一个用户
 一对一查询的的需求：查询一个订单，与此同时查询出该订单所属的用户
 
-![](R:/ImageRepository/MyBatis/202111211020360.png)
+![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111211020360.png)
 
 > 一对一查询 SQL 语句如下：
 > `select order.*, user.username, user.password from order,user where order.uid = user.id;`
 >
 > 查询结果：
-> ![](R:/ImageRepository/MyBatis/202111211216084.png)
+> ![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111211216084.png)
 
 ##### a> 创建 User 和 Order 实体
 
@@ -1913,7 +1913,7 @@ public void testFindAll_Order() {
 
 > 测试结果：
 >
-> ![](R:/ImageRepository/MyBatis/202111232127593.png)
+> ![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111232127593.png)
 
 #### 3.2 一对多查询
 
@@ -1922,7 +1922,7 @@ public void testFindAll_Order() {
 用户表和订单表的关系为，一个用户有多个订单，一个订单只从属于一个用户
 一对多查询的需求：查询一个用户，与此同时查询出该用户具有的订单
 
-![](R:/ImageRepository/MyBatis/202111211308926.png)
+![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111211308926.png)
 
 >一对多查询 SQL 语句：
 >`select * from user;`
@@ -1930,7 +1930,7 @@ public void testFindAll_Order() {
 >`select * from order where uid=查询出的用户id`
 >
 >查询的结果如下：
->![](R:/ImageRepository/MyBatis/202111211349660.png)
+>![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111211349660.png)
 
 ##### a> 修改 User 实体
 
@@ -2051,7 +2051,7 @@ public void testFindOrderAll_User() {
 
 > 测试结果：
 >
-> ![image-20211123215950681](R:/ImageRepository/MyBatis/202111232159802.png)
+> ![image-20211123215950681](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111232159802.png)
 
 #### 3.3 多对多查询
 
@@ -2059,7 +2059,7 @@ public void testFindOrderAll_User() {
 
 用户表和角色表的关系为，一个用户有多个角色，一个角色被多个用户使用
 多对多查询的需求：查询用户同时查询出该用户的所有角色
-![](R:/ImageRepository/MyBatis/202111211414462.png)
+![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111211414462.png)
 
 >多对多查询语句：
 >`select * from user;`
@@ -2067,7 +2067,7 @@ public void testFindOrderAll_User() {
 >`select * from role, user_role where role.id=user_role.role_id and user_role.user_id=用户的id`
 >
 >查询得到的结果：
->![](R:/ImageRepository/MyBatis/202111211449424.png)
+>![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111211449424.png)
 
 ##### a> 创建 Role 实体，修改 User 实体
 
@@ -2231,7 +2231,7 @@ public void test() {
 
 > 测试结果：
 >
-> ![image-20211124212223839](R:/ImageRepository/MyBatis/202111242122978.png)
+> ![image-20211124212223839](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/MyBatis/202111242122978.png)
 
 ---
 

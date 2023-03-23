@@ -201,7 +201,7 @@ public class MainController {
 test.data=100
 ```
 
-![自定义配置项](../../ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%20Boot/%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE%E9%A1%B9.png)
+![自定义配置项](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%20Boot/%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE%E9%A1%B9.png)
 
 通过这种方式，就可以更好地将一些需要频繁修改的配置项写在配置文件中，并通过注解方式去获取值。
 
@@ -3784,4 +3784,4 @@ public ConfigurableApplicationContext run(String... args) {
 
 ---
 
-![项目目录](../../ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%20Boot/%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95.png)
+![项目目录](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%20Boot/%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95.png)
