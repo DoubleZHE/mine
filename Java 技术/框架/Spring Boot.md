@@ -116,7 +116,7 @@ class SpringBootTestApplicationTests {
 完成后，直接运行项目主类，就可以直接访问：http://localhost:8080/<br>
 由于没有编写任何的请求映射，所以没有数据。
 
-![初次运行 Spring Boot 项目](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%20Boot/%E5%88%9D%E6%AC%A1%E8%BF%90%E8%A1%8C%20Spring%20Boot%20%E9%A1%B9%E7%9B%AE.png)
+![初次运行 Spring Boot 项目](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%20Boot/%E5%88%9D%E6%AC%A1%E8%BF%90%E8%A1%8C%20Spring%20Boot%20%E9%A1%B9%E7%9B%AE.png)
 
 Spring Boot 日志中除了最基本的 SpringBoot 启动日志以外，还新增了内嵌 Web 服务器（Tomcat）的启动日志，并且显示了当前 Web 服务器所开放的端口，并且自动帮助初始化了DispatcherServlet，但是只创建了项目，导入了 web 相关的 starter 依赖，没有进行任何的配置，实际上它使用的是 starter 提供的默认配置进行初始化的。
 
@@ -165,7 +165,7 @@ public Student student(){
 
 最后浏览器能够直接得到 `application/json` 的响应数据。
 
-![JSON 响应对象数据](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%20Boot/JSON%20%E5%93%8D%E5%BA%94%E5%AF%B9%E8%B1%A1%E6%95%B0%E6%8D%AE.png)
+![JSON 响应对象数据](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%20Boot/JSON%20%E5%93%8D%E5%BA%94%E5%AF%B9%E8%B1%A1%E6%95%B0%E6%8D%AE.png)
 
 ### 修改 Web 相关配置
 
@@ -201,7 +201,7 @@ public class MainController {
 test.data=100
 ```
 
-![自定义配置项](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%20Boot/%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE%E9%A1%B9.png)
+![自定义配置项](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%20Boot/%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE%E9%A1%B9.png)
 
 通过这种方式，就可以更好地将一些需要频繁修改的配置项写在配置文件中，并通过注解方式去获取值。
 
@@ -248,7 +248,7 @@ Using generated security password: 81638855-cf00-4c0a-b653-c1b288fc6bf1
 
 其中`81638855-cf00-4c0a-b653-c1b288fc6bf1`就是随机生成的一个密码，我们可以使用用户名：`user` 和此密码在 security 自动生成的登录页面完成登录。
 
-![security 生成的登录页面](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%20Boot/Security%20%E7%94%9F%E6%88%90%E7%9A%84%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2.png)
+![security 生成的登录页面](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%20Boot/Security%20%E7%94%9F%E6%88%90%E7%9A%84%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2.png)
 
 也可以在配置文件中直接配置：
 
@@ -548,11 +548,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 日志门面和日志实现就像JDBC和数据库驱动一样，一个是画大饼的，一个是真的去做饼的。
 
-![SLF4J](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%20Boot/SLF4J.png)
+![SLF4J](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%20Boot/SLF4J.png)
 
 不同的框架可能使用了不同的日志框架，希望所有的框架一律使用日志门面（Slf4j）进行日志打印。<br>可以采取类似于偷梁换柱的做法，只保留不同日志框架的接口和类定义等关键信息，而将实现全部定向为 Slf4j 调用。相当于有着和原有日志框架一样的外壳，对于其他框架来说依然可以使用对应的类进行操作，而具体如何执行，真正的内心已经是Slf4j的了。
 
-![SLF4J 调用其他日志实现](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%20Boot/SLF4J%20%E8%B0%83%E7%94%A8%E5%85%B6%E4%BB%96%E6%97%A5%E5%BF%97%E5%AE%9E%E7%8E%B0.png)
+![SLF4J 调用其他日志实现](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%20Boot/SLF4J%20%E8%B0%83%E7%94%A8%E5%85%B6%E4%BB%96%E6%97%A5%E5%BF%97%E5%AE%9E%E7%8E%B0.png)
 
 SpringBoot 为了统一日志框架的使用，做了这些事情：
 
@@ -884,7 +884,7 @@ ${AnsiColor.YELLOW} 当前 Spring Boot 版本：${spring-boot.version}
 
 最后打开 Maven 栏目，就可以自由切换了，直接勾选即可，注意切换环境之后要重新加载一下 Maven 项目，不然不会生效！
 
-![maven 多环境选择](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%20Boot/maven%20%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%80%89%E6%8B%A9.png)
+![maven 多环境选择](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%20Boot/maven%20%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%80%89%E6%8B%A9.png)
 
 ## 打包运行
 
@@ -898,7 +898,7 @@ mvn package  -DskipTests
 
 > <font color="green">提示</font>
 >
-> ![执行 Maven 目标](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%20Boot/%E6%89%A7%E8%A1%8C%20Maven%20%E7%9B%AE%E6%A0%87.png)
+> ![执行 Maven 目标](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%20Boot/%E6%89%A7%E8%A1%8C%20Maven%20%E7%9B%AE%E6%A0%87.png)
 
 打包后，会得到一个名为`springboot-study-0.0.1-SNAPSHOT.jar`的文件，这时在 CMD 窗口中输入命令：
 
@@ -2008,7 +2008,7 @@ class SpringBootTestApplicationTests {
 完成后，直接运行项目主类，就可以直接访问：http://localhost:8080/<br>
 由于没有编写任何的请求映射，所以没有数据。
 
-![初次运行 Spring Boot 项目](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%2520%25E6%258A%2580%25E6%259C%25AF/%25E6%25A1%2586%25E6%259E%25B6/Spring%2520Boot/%25E5%2588%259D%25E6%25AC%25A1%25E8%25BF%2590%25E8%25A1%258C%2520Spring%2520Boot%2520%25E9%25A1%25B9%25E7%259B%25AE.png)
+![初次运行 Spring Boot 项目](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%2520%25E6%258A%2580%25E6%259C%25AF/%25E6%25A1%2586%25E6%259E%25B6/Spring%2520Boot/%25E5%2588%259D%25E6%25AC%25A1%25E8%25BF%2590%25E8%25A1%258C%2520Spring%2520Boot%2520%25E9%25A1%25B9%25E7%259B%25AE.png)
 
 Spring Boot 日志中除了最基本的 SpringBoot 启动日志以外，还新增了内嵌 Web 服务器（Tomcat）的启动日志，并且显示了当前 Web 服务器所开放的端口，并且自动帮助初始化了DispatcherServlet，但是只创建了项目，导入了 web 相关的 starter 依赖，没有进行任何的配置，实际上它使用的是 starter 提供的默认配置进行初始化的。
 
@@ -2057,7 +2057,7 @@ public Student student(){
 
 最后浏览器能够直接得到 `application/json` 的响应数据。
 
-![JSON 响应对象数据](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%2520%25E6%258A%2580%25E6%259C%25AF/%25E6%25A1%2586%25E6%259E%25B6/Spring%2520Boot/JSON%2520%25E5%2593%258D%25E5%25BA%2594%25E5%25AF%25B9%25E8%25B1%25A1%25E6%2595%25B0%25E6%258D%25AE.png)
+![JSON 响应对象数据](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%2520%25E6%258A%2580%25E6%259C%25AF/%25E6%25A1%2586%25E6%259E%25B6/Spring%2520Boot/JSON%2520%25E5%2593%258D%25E5%25BA%2594%25E5%25AF%25B9%25E8%25B1%25A1%25E6%2595%25B0%25E6%258D%25AE.png)
 
 ### 修改 Web 相关配置
 
@@ -2093,7 +2093,7 @@ public class MainController {
 test.data=100
 ```
 
-![自定义配置项](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%2520%25E6%258A%2580%25E6%259C%25AF/%25E6%25A1%2586%25E6%259E%25B6/Spring%2520Boot/%25E8%2587%25AA%25E5%25AE%259A%25E4%25B9%2589%25E9%2585%258D%25E7%25BD%25AE%25E9%25A1%25B9.png)
+![自定义配置项](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%2520%25E6%258A%2580%25E6%259C%25AF/%25E6%25A1%2586%25E6%259E%25B6/Spring%2520Boot/%25E8%2587%25AA%25E5%25AE%259A%25E4%25B9%2589%25E9%2585%258D%25E7%25BD%25AE%25E9%25A1%25B9.png)
 
 通过这种方式，就可以更好地将一些需要频繁修改的配置项写在配置文件中，并通过注解方式去获取值。
 
@@ -2140,7 +2140,7 @@ Using generated security password: 81638855-cf00-4c0a-b653-c1b288fc6bf1
 
 其中`81638855-cf00-4c0a-b653-c1b288fc6bf1`就是随机生成的一个密码，我们可以使用用户名：`user` 和此密码在 security 自动生成的登录页面完成登录。
 
-![security 生成的登录页面](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%2520%25E6%258A%2580%25E6%259C%25AF/%25E6%25A1%2586%25E6%259E%25B6/Spring%2520Boot/Security%2520%25E7%2594%259F%25E6%2588%2590%25E7%259A%2584%25E7%2599%25BB%25E5%25BD%2595%25E9%25A1%25B5%25E9%259D%25A2.png)
+![security 生成的登录页面](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%2520%25E6%258A%2580%25E6%259C%25AF/%25E6%25A1%2586%25E6%259E%25B6/Spring%2520Boot/Security%2520%25E7%2594%259F%25E6%2588%2590%25E7%259A%2584%25E7%2599%25BB%25E5%25BD%2595%25E9%25A1%25B5%25E9%259D%25A2.png)
 
 也可以在配置文件中直接配置：
 
@@ -2440,11 +2440,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 日志门面和日志实现就像JDBC和数据库驱动一样，一个是画大饼的，一个是真的去做饼的。
 
-![SLF4J](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%2520%25E6%258A%2580%25E6%259C%25AF/%25E6%25A1%2586%25E6%259E%25B6/Spring%2520Boot/SLF4J.png)
+![SLF4J](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%2520%25E6%258A%2580%25E6%259C%25AF/%25E6%25A1%2586%25E6%259E%25B6/Spring%2520Boot/SLF4J.png)
 
 不同的框架可能使用了不同的日志框架，希望所有的框架一律使用日志门面（Slf4j）进行日志打印。<br>可以采取类似于偷梁换柱的做法，只保留不同日志框架的接口和类定义等关键信息，而将实现全部定向为 Slf4j 调用。相当于有着和原有日志框架一样的外壳，对于其他框架来说依然可以使用对应的类进行操作，而具体如何执行，真正的内心已经是Slf4j的了。
 
-![SLF4J 调用其他日志实现](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%2520%25E6%258A%2580%25E6%259C%25AF/%25E6%25A1%2586%25E6%259E%25B6/Spring%2520Boot/SLF4J%2520%25E8%25B0%2583%25E7%2594%25A8%25E5%2585%25B6%25E4%25BB%2596%25E6%2597%25A5%25E5%25BF%2597%25E5%25AE%259E%25E7%258E%25B0.png)
+![SLF4J 调用其他日志实现](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%2520%25E6%258A%2580%25E6%259C%25AF/%25E6%25A1%2586%25E6%259E%25B6/Spring%2520Boot/SLF4J%2520%25E8%25B0%2583%25E7%2594%25A8%25E5%2585%25B6%25E4%25BB%2596%25E6%2597%25A5%25E5%25BF%2597%25E5%25AE%259E%25E7%258E%25B0.png)
 
 SpringBoot 为了统一日志框架的使用，做了这些事情：
 
@@ -2776,7 +2776,7 @@ ${AnsiColor.YELLOW} 当前 Spring Boot 版本：${spring-boot.version}
 
 最后打开 Maven 栏目，就可以自由切换了，直接勾选即可，注意切换环境之后要重新加载一下 Maven 项目，不然不会生效！
 
-![maven 多环境选择](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%2520%25E6%258A%2580%25E6%259C%25AF/%25E6%25A1%2586%25E6%259E%25B6/Spring%2520Boot/maven%2520%25E5%25A4%259A%25E7%258E%25AF%25E5%25A2%2583%25E9%2580%2589%25E6%258B%25A9.png)
+![maven 多环境选择](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%2520%25E6%258A%2580%25E6%259C%25AF/%25E6%25A1%2586%25E6%259E%25B6/Spring%2520Boot/maven%2520%25E5%25A4%259A%25E7%258E%25AF%25E5%25A2%2583%25E9%2580%2589%25E6%258B%25A9.png)
 
 ## 打包运行
 
@@ -2790,7 +2790,7 @@ mvn package  -DskipTests
 
 > <font color="green">提示</font>
 >
-> ![执行 Maven 目标](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%2520%25E6%258A%2580%25E6%259C%25AF/%25E6%25A1%2586%25E6%259E%25B6/Spring%2520Boot/%25E6%2589%25A7%25E8%25A1%258C%2520Maven%2520%25E7%259B%25AE%25E6%25A0%2587.png)
+> ![执行 Maven 目标](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%2520%25E6%258A%2580%25E6%259C%25AF/%25E6%25A1%2586%25E6%259E%25B6/Spring%2520Boot/%25E6%2589%25A7%25E8%25A1%258C%2520Maven%2520%25E7%259B%25AE%25E6%25A0%2587.png)
 
 打包后，会得到一个名为`springboot-study-0.0.1-SNAPSHOT.jar`的文件，这时在 CMD 窗口中输入命令：
 
@@ -3784,4 +3784,4 @@ public ConfigurableApplicationContext run(String... args) {
 
 ---
 
-![项目目录](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%20Boot/%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95.png)
+![项目目录](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%20Boot/%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95.png)

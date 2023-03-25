@@ -75,7 +75,7 @@
    
    结果：
    
-      ![image-20210915162344](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/20210915162344.png)
+      ![image-20210915162344](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/20210915162344.png)
 
 ------
 
@@ -101,11 +101,11 @@
 
 3. 画图讲解 IOC 底层原理
 
-   ![image-20210915172237](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/20210915172237.png)
+   ![image-20210915172237](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/20210915172237.png)
 
-   ![image-20210915172823](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/20210915172823.png)
+   ![image-20210915172823](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/20210915172823.png)
    
-   ![image-20210915173621733](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20210915173621733.png)
+   ![image-20210915173621733](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20210915173621733.png)
 
 ------
 
@@ -127,7 +127,7 @@
 
 3. ApplicationContext接口有实现类
 
-   ![image-20210915185204751](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20210915185204751.png)
+   ![image-20210915185204751](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20210915185204751.png)
 
 ------
 
@@ -249,7 +249,7 @@
    
        ① 第一步，添加 p名称空间在配置文件中
    
-       ![image-20210915213308547](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20210915213308547.png)
+       ![image-20210915213308547](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20210915213308547.png)
    
        ② 第二步，进行属性注入，在 bean标签里面进行操作
    
@@ -375,7 +375,7 @@
    
    2）第二种写法
    
-   ![image-20210919181751371](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20210919181751371.png)
+   ![image-20210919181751371](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20210919181751371.png)
    
    ```xml
        <!-- 级联赋值 -->
@@ -608,7 +608,7 @@
 1. 在Spring里面，设置创建bean实例是单实例还是多实例
 2. 在Spring里面，默认情况下，bean是单实例对象
 
-![image-20210921155742539](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20210921155742539.png)
+![image-20210921155742539](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20210921155742539.png)
 
 3. 如何设置单实例还是多实例
 
@@ -632,7 +632,7 @@
     </bean>
 ```
 
-![image-20210921160550203](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20210921160550203.png)
+![image-20210921160550203](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20210921160550203.png)
 
 3)singleton和prototype区别
 
@@ -716,7 +716,7 @@
 
    结果：
 
-   ![image-20210922121713876](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20210922121713876.png)
+   ![image-20210922121713876](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20210922121713876.png)
 
 3. bean的后置处理器。bean的生命周期共有七步。
 
@@ -813,7 +813,7 @@
 
    1）创建外部属性文件，properties格式文件，写数据库信息；
 
-   ![image-20210927205805924](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20210927205805924.png)
+   ![image-20210927205805924](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20210927205805924.png)
 
    2）把外部properties属性文件引入到spring配置文案中
 
@@ -1017,7 +1017,7 @@ public class SpringConfig {
 
 3）使用登录例子说明AOP
 
-![image-20211006211613790](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211006211613790.png)
+![image-20211006211613790](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211006211613790.png)
 
 ### 底层原理
 
@@ -1029,23 +1029,23 @@ public class SpringConfig {
 
 - 创建接口实现类代理对象，增强类的方法
 
-![image-AimBG54cQrMeTN8](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/AimBG54cQrMeTN8.png)
+![image-AimBG54cQrMeTN8](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/AimBG54cQrMeTN8.png)
 
 第二种 无接口情况，使用CGLIB动态代理
 
 - 创建子类的代理对象，增强类的方法
 
-![image-20211006213942708](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211006213942708.png)
+![image-20211006213942708](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211006213942708.png)
 
 #### JDK动态代理
 
 1. 使用JDK动态代理，使用Proxy类里面的方法创建代理对象
 
-![image-20211007110527330](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211007110527330.png)
+![image-20211007110527330](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211007110527330.png)
 
 1）调用newProxyInstance()方法
 
-![image-20211007110616591](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211007110616591.png)
+![image-20211007110616591](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211007110616591.png)
 
 > 方法有三个参数：
 >
@@ -1141,7 +1141,7 @@ class UserDaoProxy implements InvocationHandler {
 
 运行结果：
 
-![image-20211007114918187](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211007114918187.png)
+![image-20211007114918187](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211007114918187.png)
 
 ### 常见术语
 
@@ -1212,7 +1212,7 @@ class UserDaoProxy implements InvocationHandler {
     </dependencies>
 ```
 
-![image-20211009192359889](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211009192359889.png)
+![image-20211009192359889](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211009192359889.png)
 
 4. 切入点表达式
 
@@ -1290,13 +1290,13 @@ public class UserProxy {
 
    2）使用注解User和UserProxy对象
 
-   ![image-20211009215012960](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211009215012960.png)
+   ![image-20211009215012960](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211009215012960.png)
 
-   ![image-20211009215039979](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211009215039979.png)
+   ![image-20211009215039979](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211009215039979.png)
 
    3）在增强类上面添加注解`@Aspect`
 
-   ![image-20211009215341818](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211009215341818.png)
+   ![image-20211009215341818](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211009215341818.png)
 
    4）在spring配置文件中开启生成代理对象
 
@@ -1401,7 +1401,7 @@ public class ConfigAop {
 
 1. 创建两个类，增强类和被增强类，创建方法
 
-![image-20211011185558028](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211011185558028.png)
+![image-20211011185558028](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211011185558028.png)
 
 2. 在spring配置文件中创建两个类对象
 
@@ -1660,7 +1660,7 @@ public class BookDaoImpl implements BookDao {
 1. 查询表里面有多少条记录，返回是某个值
 2. 使用JdbcTemplate实现查询返回某个值代码
 
-![image-20211019184609687](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211019184609687.png)
+![image-20211019184609687](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211019184609687.png)
 
 两个参数
 
@@ -1703,7 +1703,7 @@ public class BookDaoImpl implements BookDao {
 1. 场景：查询图书列表分页
 2. 调用JdbcTempalte方法实现查询返回集合
 
-![image-20211019192011325](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211019192011325.png)
+![image-20211019192011325](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211019192011325.png)
 
 三个参数
 
@@ -1724,7 +1724,7 @@ public class BookDaoImpl implements BookDao {
 
 操作表里面多条记录。
 
-![image-20211019200340462](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211019200340462.png)
+![image-20211019200340462](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211019200340462.png)
 
 两个参数
 
@@ -1886,7 +1886,7 @@ public class BookDaoImpl implements BookDao {
 
    2）典型场景：银行转账 
 
-   ![image-20211020215057243](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211020215057243.png)
+   ![image-20211020215057243](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211020215057243.png)
 
 2. 事务四大特性（ACID）
    - 原子性
@@ -1898,7 +1898,7 @@ public class BookDaoImpl implements BookDao {
 
 1. 创建数据库表，添加记录
 
-![image-20211020195020493](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211020195020493.png)
+![image-20211020195020493](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211020195020493.png)
 
 2. 创建service，搭建dao，完成对象的创建和注入
 
@@ -2004,7 +2004,7 @@ public class UserService {
 
    2）事务操作的基本过程
 
-   ![image-20211021162337537](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211021162337537.png)
+   ![image-20211021162337537](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211021162337537.png)
 
 ### Spring事务管理介绍
 
@@ -2024,7 +2024,7 @@ public class UserService {
 
 5. Spring事务管理API：提供一个接口，代表事务管理器，这个接口针对不同的框架提供不同的实现类
 
-   ![image-20211021205833287](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211021205833287.png)
+   ![image-20211021205833287](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211021205833287.png)
 
 ### 声明式事务管理
 
@@ -2096,7 +2096,7 @@ public class UserService {}
 
 在service类上面添加`@Transactional`，在这个注解里面可以配置事务相关参数
 
-![image-20211022183114078](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211022183114078.png)
+![image-20211022183114078](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211022183114078.png)
 
 
 
@@ -2104,9 +2104,9 @@ public class UserService {}
 
   多事务方法直接进行调用，这个过程中事务是如何进行管理的
 
-  ![image-20211022192724258](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211022192724258.png)
+  ![image-20211022192724258](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211022192724258.png)
 
-  ![image-20211022192326550](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211022192326550.png)
+  ![image-20211022192326550](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211022192326550.png)
 
   ```java
   @Transactional(propagation = Propagation.REQUIRED)
@@ -2122,17 +2122,17 @@ public class UserService {}
 
   ​	脏读：一个未提交事务读取到另一个未提交事务的数据
 
-  ​	![image-20211022193530318](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211022193530318.png)
+  ​	![image-20211022193530318](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211022193530318.png)
 
   ​	不可重复读：一个未提交事务读取到另一提交事务修改数据
 
-  ​		![image-20211022193845389](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211022193845389.png)
+  ​		![image-20211022193845389](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211022193845389.png)
 
   ​	幻读：一个未提交事务读取到另一提交事务添加数据
 
   3）通过设置事务隔级别，解决读问题
 
-  ​	![image-20211022195057348](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211022195057348.png)
+  ​	![image-20211022195057348](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/image-20211022195057348.png)
 
   ```java
   @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ)
@@ -2440,7 +2440,7 @@ public void testGenericApplicationContext2() {
 #### SpringWebflux介绍
 1. Webflux是 Spring5 添加新的模块，用于 web 开发的，功能和 SpringMVC 类似的，Webflux 使用当前一种比较流行的响应式编程出现的框架。
 
-![image-202110261932898](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/202110261932898.png)
+![image-202110261932898](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/202110261932898.png)
 
 2. 使用传统 web 框架，比如 SpringMVC，这些基于 Servlet 容器，Webflux 是一种异步非阻塞的框架，异步非阻塞的框架在 Servlet3.1 以后才支持，核心是基于 Reactor 的相关 API 实现的。
 
@@ -2464,7 +2464,7 @@ public void testGenericApplicationContext2() {
 
 5. 比较 SpringMVC
 
-![image-202110262127693](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/202110262127693.png)
+![image-202110262127693](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/202110262127693.png)
 
 1）两个框架都可以使用注解方式，都运行在 Tomcat 等容器中
 
@@ -2512,7 +2512,7 @@ public class ObserverDemo extends Observable {
 3. Flux 和 Mono 都是数据流的发布之，使用 Flux 和 Mono 都可以发出三种数据信号：元素值、错误信号、完成信号。
    错误信号和完成信号都代表终止信号。终止信号用于告诉订阅者数据流结束了，错误信号终止数据流同时把错误信息传递给订阅者。
 
-   ![image-202110272123654](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/202110272123654.png)
+   ![image-202110272123654](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/202110272123654.png)
 
 4. 代码演示 Flux 和 Mono
 
@@ -2564,13 +2564,13 @@ Mono.just(1).subscribe(System.out::print);
 
 - map：元素映射为新元素
 
-  ![image-202110281006723](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/202110281006723.png)
+  ![image-202110281006723](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/202110281006723.png)
 
 - flatMap：元素映射为流
   
   把每个元素转换流，把转换之后多个流合并为大的流。
 
-  ![image-202110281010103](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/202110281010103.png)
+  ![image-202110281010103](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/202110281010103.png)
 
 
 
@@ -2583,11 +2583,11 @@ SpringWebflux基于Reactor，默认使用容器是 `Netty`，Netty 是高性能�
 
 - BIO，异步阻塞
 
-![image-202110281031473](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/202110281031473.png)
+![image-202110281031473](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/202110281031473.png)
 
 - NIO，异步非阻塞
 
-![image-202110281032375](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/202110281032375.png)
+![image-202110281032375](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/202110281032375.png)
 
 2. SpringWebflux 执行过程和 SpringMVC 相似的
 
@@ -2632,7 +2632,7 @@ SpringWebflux实现方式有两种：注解编程模型和函数式编程模型�
 
 第一步 创建 SpringBoot 工程，引入webflux 依赖
 
-![image-202110281411939](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/202110281411939.png)
+![image-202110281411939](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/202110281411939.png)
 
 ```xml
 <dependency>
@@ -2643,7 +2643,7 @@ SpringWebflux实现方式有两种：注解编程模型和函数式编程模型�
 
 第二步 配置启动的端口号
 
-![image-202110281414772](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/202110281414772.png)
+![image-202110281414772](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring5/202110281414772.png)
 
 第三步 创建包和相关类
 

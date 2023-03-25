@@ -1,18 +1,3 @@
----
-title: Sping MVC
-tags: 
- - 编程学习
- - Java
- - SSM 框架
-categories: 
- - SSM 框架
-keywords: 
-date: 2022-01-06 19:11:37
-description: 
-top_img:
-cover:https://qiniu.daxueyiwu.com/gxitsky/b4fac27466e511ec9ef0005056c000081640589731.jpg
----
-
 ## SpringMVC 简介
 
 ### 什么是 MVC
@@ -68,7 +53,7 @@ Spring版本:5.3.9
 
 #### a> 添加web模块
 
-![image-202110291048833](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/SpringMVC/202110291048833.png)
+![image-202110291048833](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/SpringMVC/202110291048833.png)
 
 #### b> 打包方式:war
 
@@ -897,7 +882,7 @@ public String testApplication(HttpSession session) {
 }
 ```
 
-![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/SpringMVC/202111052131426.png)
+![](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/SpringMVC/202111052131426.png)
 
 ---
 
@@ -926,7 +911,7 @@ SpringMVC 视图的种类很多,默认有转发视图 InternalResourceView 和�
     }
 ```
 
-![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/SpringMVC/202111071413874.png)
+![](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/SpringMVC/202111071413874.png)
 
 ### 转发视图
 
@@ -949,7 +934,7 @@ SpringMVC 中创建转发视图的情况:
     }
 ```
 
-![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/SpringMVC/202111071414792.png)
+![](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/SpringMVC/202111071414792.png)
 
 ### 重定向视图
 
@@ -970,7 +955,7 @@ SpringMVC 中默认的重定向视图是 RedirectView
     }
 ```
 
-![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/SpringMVC/202111071414378.png)
+![](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/SpringMVC/202111071414378.png)
 
 > 注:
 >
@@ -1290,46 +1275,46 @@ b> 当前请求必须传输请求参数 _method
 
   ```java
   package RESTFul.dao;
-
+  
   import RESTFul.bean.Employee;
   import org.springframework.stereotype.Repository;
-
+  
   import java.util.Collection;
   import java.util.HashMap;
   import java.util.Map;
-
+  
   @Repository
   public class EmployeeDao {
-
+  
       private static Map<Integer, Employee> employees = null;
-
+  
       static{
           employees = new HashMap<Integer, Employee>();
-
+  
           employees.put(1001, new Employee(1001, "E-AA", "aa@163.com", 1));
           employees.put(1002, new Employee(1002, "E-BB", "bb@163.com", 1));
           employees.put(1003, new Employee(1003, "E-CC", "cc@163.com", 0));
           employees.put(1004, new Employee(1004, "E-DD", "dd@163.com", 0));
           employees.put(1005, new Employee(1005, "E-EE", "ee@163.com", 1));
       }
-
+  
       private static Integer initId = 1006;
-
+  
       public void save(Employee employee){
           if(employee.getId() == null){
               employee.setId(initId++);
           }
           employees.put(employee.getId(), employee);
       }
-
+  
       public Collection<Employee> getAll(){
           return employees.values();
       }
-
+  
       public Employee get(Integer id){
           return employees.get(id);
       }
-
+  
       public void delete(Integer id){
           employees.remove(id);
       }
@@ -1494,7 +1479,7 @@ public class EmployeeController {
 
 >引入 vue.js 后需要重新打包,不然会报 404
 >
->![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/SpringMVC/SpringMVC/202111122128207.png)
+>![](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/SpringMVC/SpringMVC/202111122128207.png)
 >
 >还得在 springMVC.xml 文件中添加一行代码，不然也会报 404
 >
@@ -2220,7 +2205,7 @@ public String index(){
 
 DispatcherServlet 本质上是一个 Servlet，所以天然的遵循 Servlet 的生命周期。所以宏观上是 Servlet 生命周期来进行调度。
 
-![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/SpringMVC/202111171906612.png)
+![](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/SpringMVC/202111171906612.png)
 
 ##### a> 初始化 WebApplicationContext
 
@@ -2603,15 +2588,15 @@ i. 再判断是否配置了 mvc:default-servlet-handler
 
 ii. 如果没配置，则控制台报映射查找不到，客户端展示 404 错误
 
-![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/SpringMVC/202111171913611.png)
+![](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/SpringMVC/202111171913611.png)
 
-![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/SpringMVC/202111171913283.png)
+![](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/SpringMVC/202111171913283.png)
 
 iii. 如果有配置，则访问目标资源（一般为静态资源，如：JS, CSS, HTML），找不到客户端也会展示 404 错误
 
-![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/SpringMVC/202111171913646.png)
+![](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/SpringMVC/202111171913646.png)
 
-![](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/SpringMVC/202111171914772.png)
+![](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/SpringMVC/202111171914772.png)
 
 b) 存在则执行下面的流程
 

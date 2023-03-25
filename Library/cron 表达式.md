@@ -4,7 +4,7 @@ corn 表达式就是：**由若干数字、空格、符号按一定的规则，�
 
 cron 表达式是一个字符串，由 6 到 7 个字段组成，用空格分隔。其中前 6 个字段是必须的，最后一个是可选的【年的实用性不大】。每个字段的含义如图所示：
 
-![cron 表达式含义图](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Library/cron%20%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%90%AB%E4%B9%89%E5%9B%BE.png)
+![cron 表达式含义图](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Library/cron%20%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%90%AB%E4%B9%89%E5%9B%BE.png)
 
 ## 99% 情况下会用到的字符
 

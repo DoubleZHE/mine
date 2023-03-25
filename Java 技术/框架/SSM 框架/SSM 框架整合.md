@@ -16,7 +16,7 @@ MyBatis 作为数据对象的持久化引擎
 
 
 
-![image-20211126161251466](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88/202111261612766.png)
+![image-20211126161251466](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88/202111261612766.png)
 
 
 
@@ -329,7 +329,7 @@ public class MyBatisSpringTest {
 
 > 测试结果：
 >
-> ![image-20211128183305843](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88/202111281833999.png)
+> ![image-20211128183305843](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88/202111281833999.png)
 
 ### 整合 Spring MVC 
 
@@ -465,7 +465,7 @@ public class AccountController {
 
 3. 浏览器结果
 
-![image-20211128191813182](https://gitee.com/DoubleZHEz/mine/raw/master/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88/202111281918266.png)
+![image-20211128191813182](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/Spring%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88/202111281918266.png)
 
 > json 数据交互 jar 包一定得有，不然会出现错误。需要 json 包将 Java 对象转换为 json 对象显示在浏览器中。
 
