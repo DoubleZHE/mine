@@ -1,27 +1,5 @@
 # Spring 5
 
-课程内容介绍
-
-1. Spring框架概述
-
-2. IOC容器
-
-   - IOC底层原理
-
-   - IOC接口（BeanFactory）
-
-   - IOC操作 Bean 管理（基于xml）
-
-   - IOC操作 Bean 管理（基于注解）
-
-3. Aop
-
-4. JdbcTemplate
-
-5. 事务管理
-
-6. Spring5新特性
-
 ## 概述
 
 1. Spring是轻量级的开源的JavaEE框架
@@ -2200,11 +2178,11 @@ public class UserService {}
 1. 在spring配置文件中进行配置
 
 	第一步 配置事务管理器
-
+	
 	第二步 配置通知
 	
 	第三步 配置切入点和切面
-	
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
