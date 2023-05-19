@@ -1479,7 +1479,7 @@ public class EmployeeController {
 
 >引入 vue.js 后需要重新打包,不然会报 404
 >
->![](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/SpringMVC/SpringMVC/202111122128207.png)
+>![](https://gitee.com/DoubleZHEz/mine/raw/main/ImageRepository/Java%20%E6%8A%80%E6%9C%AF/%E6%A1%86%E6%9E%B6/SpringMVC/202111122128207.png)
 >
 >还得在 springMVC.xml 文件中添加一行代码，不然也会报 404
 >

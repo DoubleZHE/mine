@@ -4,6 +4,8 @@ npm run build
 npx cap copy
 npx cap sync
 npx cap open android
+
+ionic capacitor run android -l --external
 ```
 
 问题：
