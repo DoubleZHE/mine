@@ -1,17 +1,12 @@
-<!doctype html>
-<html>
-<head>
-<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
-<title>code</title>
-</head>
-<body><pre><code class='language-java' lang='java'>/**
+~~~java
+/**
  * 出入库记录Service业务层处理
  *
  * @author renzhezhe
  * @date 2022-05-19
  */
 @Service
-public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, TInOutRecord&gt; implements ITInOutRecordService, IDefualtService&lt;TInOutRecord&gt; {
+public class TInOutRecordServiceImpl extends ServiceImpl<TInOutRecordMapper, TInOutRecord> implements ITInOutRecordService, IDefualtService<TInOutRecord> {
     @Autowired
     private TInOutRecordMapper tInOutRecordMapper;
 
@@ -91,16 +86,16 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
     @Override
     public TInOutRecord selectTInOutRecordById(Long id) {
         TInOutRecord tInOutRecord = tInOutRecordMapper.selectTInOutRecordById(id);
-        List&lt;TInOutRecordBody&gt; tInOutRecordBodies = tInOutRecordBodyMapper.selectList(new LambdaQueryWrapper&lt;TInOutRecordBody&gt;().eq(TInOutRecordBody::getTInOutRecordId, id));
+        List<TInOutRecordBody> tInOutRecordBodies = tInOutRecordBodyMapper.selectList(new LambdaQueryWrapper<TInOutRecordBody>().eq(TInOutRecordBody::getTInOutRecordId, id));
         if (CollUtil.isNotEmpty(tInOutRecordBodies)) {
             tInOutRecord.setInOutRecordBodyList(tInOutRecordBodies);
             for (TInOutRecordBody tInOutRecordBody : tInOutRecordBodies) {
-                List&lt;TInOutRecordBodyInspect&gt; tInOutRecordBodyInspects = inOutRecordBodyInspectMapper.selectList(
+                List<TInOutRecordBodyInspect> tInOutRecordBodyInspects = inOutRecordBodyInspectMapper.selectList(
                         Wrappers.lambdaQuery(TInOutRecordBodyInspect.class)
                                 .eq(TInOutRecordBodyInspect::getInOutRecordBodyId, tInOutRecordBody.getId())
                 );
                 String identifier = tInOutRecordBody.getIdentifier();
-                String[] split = StrUtil.split(identifier, &quot;,&quot;);
+                String[] split = StrUtil.split(identifier, ",");
                 tInOutRecordBody.setIdentifierList(Arrays.asList(split));
                 tInOutRecordBody.setBodyInspects(tInOutRecordBodyInspects);
 
@@ -116,7 +111,7 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
      * @return 出入库记录
      */
     @Override
-    public List&lt;TInOutRecord&gt; selectTInOutRecordList(TInOutRecord tInOutRecord) {
+    public List<TInOutRecord> selectTInOutRecordList(TInOutRecord tInOutRecord) {
         return tInOutRecordMapper.selectTInOutRecordList(tInOutRecord);
     }
 
@@ -129,50 +124,50 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
     @Override
     @Transactional
     public int insertTInOutRecord(TInOutRecord tInOutRecord) {
-        double sum = tInOutRecord.getInOutRecordBodyList().stream().mapToDouble(a -&gt; Convert.toDouble(a.getQuantityInventory())).sum();
+        double sum = tInOutRecord.getInOutRecordBodyList().stream().mapToDouble(a -> Convert.toDouble(a.getQuantityInventory())).sum();
         if(sum == 0) {
-            throw new RuntimeException(&quot;入库材料数量不能全部为0！&quot;);
+            throw new RuntimeException("入库材料数量不能全部为0！");
         }
         String singleNumber = tInOutRecord.getSingleNumber();
         // 如果出库单号不为空，则校验唯一，否则自动生成
         if (StrUtil.isNotBlank(singleNumber)) {
-            LambdaQueryWrapper&lt;TInOutRecord&gt; qw = new LambdaQueryWrapper&lt;&gt;();
+            LambdaQueryWrapper<TInOutRecord> qw = new LambdaQueryWrapper<>();
             qw.eq(TInOutRecord::getSingleNumber, singleNumber)
-                    .eq(TInOutRecord::getDelFlag, &quot;0&quot;)
+                    .eq(TInOutRecord::getDelFlag, "0")
                     .eq(TInOutRecord::getOperateType, tInOutRecord.getOperateType());
             int count = count(qw);
-            if (count &gt; 0) {
-                throw new RuntimeException(&quot;出库单号已存在，请勿重复操作！&quot;);
+            if (count > 0) {
+                throw new RuntimeException("出库单号已存在，请勿重复操作！");
             }
         } else {
-            tInOutRecord.setSingleNumber(createBatchNumberByDocumentType(&quot;inOutRecordNo&quot;, 1, 4).get(0));
+            tInOutRecord.setSingleNumber(createBatchNumberByDocumentType("inOutRecordNo", 1, 4).get(0));
         }
         getBasis(tInOutRecord, types.ADD);
         //判断是哪种类型  材料入库还是出库，产品入库还是出库
         switch (tInOutRecord.getOperateType()) {
             //采购入库或退料入库 其他入库
-            case &quot;0&quot;:
-            case &quot;1&quot;:
-            case &quot;8&quot;:
+            case "0":
+            case "1":
+            case "8":
                 purchaseInsert(tInOutRecord);
                 break;
-            case &quot;2&quot;:
-            case &quot;4&quot;:
-            case &quot;7&quot;:
+            case "2":
+            case "4":
+            case "7":
                 //生产入库或退货入库 其他入库
                 productInsert(tInOutRecord);
                 break;
             // 领料出库
-            case &quot;5&quot;:
+            case "5":
                 purchaseOut(tInOutRecord);
                 break;
             //成品出库
-            case &quot;6&quot;:
+            case "6":
                 // 成品出库 新建出库单时不扣减库存，运输单状态为运输中时才开始扣减库存，运输单作废，库存要加回去
 //                 productOut(tInOutRecord);
-                tInOutRecord.setOutboundOrderStatus(&quot;0&quot;);
+                tInOutRecord.setOutboundOrderStatus("0");
                 break;
-            case &quot;9&quot;:
+            case "9":
                 // 成品采购入库
                 productPurchaseIn(tInOutRecord);
                 break;
@@ -182,15 +177,15 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
         tInOutRecordMapper.insertTInOutRecord(tInOutRecord);
         //不同类型有各自不同的处理方法
         for (TInOutRecordBody tInOutRecordBody : tInOutRecord.getInOutRecordBodyList()) {
-            if(new BigDecimal(0).compareTo(tInOutRecordBody.getQuantityInventory()) &gt;= 0) {
+            if(new BigDecimal(0).compareTo(tInOutRecordBody.getQuantityInventory()) >= 0) {
                 continue;
             }
-            if(StrUtil.equals(tInOutRecord.getOperateType(), &quot;6&quot;)) {
-                tProductInformationMapper.updateOutRecordFLag(tInOutRecordBody.getIdentifier(), &quot;1&quot;);
+            if(StrUtil.equals(tInOutRecord.getOperateType(), "6")) {
+                tProductInformationMapper.updateOutRecordFLag(tInOutRecordBody.getIdentifier(), "1");
                 // 销售订单 明细加上已出库数量
                 ordersNewListService.subOrAddOutQuantity(tInOutRecordBody, true);
             }
-            if(StrUtil.equals(tInOutRecord.getOperateType(), &quot;0&quot;)) {
+            if(StrUtil.equals(tInOutRecord.getOperateType(), "0")) {
                 // 修改采购单 已入库的数量
                 TPurchaseSingle single = new TPurchaseSingle();
                 single.setTicketNo(tInOutRecord.getAssociatedNo());
@@ -207,39 +202,39 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
             tInOutRecordBody.setUpdateBy(tInOutRecord.getUpdateBy());
             tInOutRecordBody.setUpdateTime(tInOutRecord.getUpdateTime());
             // 领料出库， 出库单和领料单一对多。一个出库单明细对应一条领料单
-            if(!StrUtil.equals(tInOutRecord.getOperateType(), &quot;5&quot;) &amp;&amp; !StrUtil.equals(tInOutRecord.getOperateType(), &quot;6&quot;)) {
+            if(!StrUtil.equals(tInOutRecord.getOperateType(), "5") && !StrUtil.equals(tInOutRecord.getOperateType(), "6")) {
                 tInOutRecordBody.setAssociatedNo(tInOutRecord.getAssociatedNo());
             } else {
                 // 领料出库
-                List&lt;SupplierStoreSubDTO&gt; setNumList = tInOutRecordBody.getSetNumList();
+                List<SupplierStoreSubDTO> setNumList = tInOutRecordBody.getSetNumList();
                 if(CollUtil.isNotEmpty(setNumList)) {
                     tInOutRecordBody.setOutSupplier(JSON.toJSONString(setNumList));
                 }
             }
-            if(tInOutRecord.getOperateType().equals(&quot;9&quot;)) {
-                List&lt;String&gt; identifierList = tInOutRecordBody.getIdentifierList();
-                String collect = String.join(&quot;,&quot;, identifierList);
+            if(tInOutRecord.getOperateType().equals("9")) {
+                List<String> identifierList = tInOutRecordBody.getIdentifierList();
+                String collect = String.join(",", identifierList);
                 tInOutRecordBody.setIdentifier(collect);
             }
             tInOutRecordBody.setOperateType(tInOutRecord.getOperateType());
             tInOutRecordBodyMapper.insertTInOutRecordBody(tInOutRecordBody);
-            if(tInOutRecord.getOperateType().equals(&quot;9&quot;)) {
-                List&lt;String&gt; identifierList = tInOutRecordBody.getIdentifierList();
+            if(tInOutRecord.getOperateType().equals("9")) {
+                List<String> identifierList = tInOutRecordBody.getIdentifierList();
                 for (String identifier : identifierList) {
                     TInOutRecordBodyInspect bodyInspect = new TInOutRecordBodyInspect();
                     bodyInspect.setInOutRecordBodyId(tInOutRecordBody.getId());
                     bodyInspect.setCreateBy(SecurityUtils.getUsername());
                     bodyInspect.setIdentifier(identifier);
-                    bodyInspect.setStatus(&quot;0&quot;);
+                    bodyInspect.setStatus("0");
                     inOutRecordBodyInspectMapper.insert(bodyInspect);
                 }
             }
         }
         //如果是采购订单修改状态
-        if(tInOutRecord.getOperateType().equals(&quot;0&quot;)|| tInOutRecord.getOperateType().equals(&quot;9&quot;)){
+        if(tInOutRecord.getOperateType().equals("0")|| tInOutRecord.getOperateType().equals("9")){
             String associatedNo = tInOutRecord.getAssociatedNo();
-            List&lt;TPurchaseSingleDetailVo&gt; tPurchaseSingleDetailByTicketNo = tInOutRecordMapper.getTPurchaseSingleDetailByTicketNo(associatedNo);
-            if(tInOutRecord.getOperateType().equals(&quot;9&quot;)) {
+            List<TPurchaseSingleDetailVo> tPurchaseSingleDetailByTicketNo = tInOutRecordMapper.getTPurchaseSingleDetailByTicketNo(associatedNo);
+            if(tInOutRecord.getOperateType().equals("9")) {
                 tPurchaseSingleDetailByTicketNo = tInOutRecordMapper.getTProductSingleDetailByTicketNo(associatedNo);
             }
             TPurchaseOrderHeader tPurchaseOrderHeader = new TPurchaseOrderHeader();
@@ -251,11 +246,11 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
                 haved = haved.add(tPurchaseSingleDetailVo.getLaveQuantityInventoryed());
             }
             if(haved.intValue()==0){
-                tPurchaseOrderHeader.setProductStatus(&quot;0&quot;);
-            }else if(haved.intValue() &gt;= need.intValue()){
-                tPurchaseOrderHeader.setProductStatus(&quot;1&quot;);
+                tPurchaseOrderHeader.setProductStatus("0");
+            }else if(haved.intValue() >= need.intValue()){
+                tPurchaseOrderHeader.setProductStatus("1");
             }else{
-                tPurchaseOrderHeader.setProductStatus(&quot;2&quot;);
+                tPurchaseOrderHeader.setProductStatus("2");
             }
             tPurchaseOrderHeaderMapper.updateTPurchaseOrderHeader(tPurchaseOrderHeader);
         }
@@ -268,7 +263,7 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
      */
     @Override
     @Transactional
-    public synchronized void productOutByIdentifier(List&lt;TGoods&gt; goods) {
+    public synchronized void productOutByIdentifier(List<TGoods> goods) {
         for (TGoods good : goods) {
             // 成品唯一识别码
             String identifier = good.getBatchNumber();
@@ -277,12 +272,12 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
                     Wrappers.lambdaQuery(TInventoryDetails.class).eq(TInventoryDetails::getIdentifier, identifier)
             );
             if(inventoryDetails == null) {
-                throw new RuntimeException(&quot;库存中不存在&#39;&quot; + good.getGoodsName() + &quot;&#39;产品，请选择其他出库单！&quot;);
+                throw new RuntimeException("库存中不存在'" + good.getGoodsName() + "'产品，请选择其他出库单！");
             }
             BigDecimal inventoryQuantity = inventoryDetails.getInventoryQuantity();
-            if (inventoryQuantity.compareTo(NumberUtil.toBigDecimal(1)) &lt; 0) {
+            if (inventoryQuantity.compareTo(NumberUtil.toBigDecimal(1)) < 0) {
                 // 库存不足，出库失败
-                throw new RuntimeException(&quot;产品：&#39;&quot; + good.getGoodsName() + &quot;&#39; 库存不足，请选择其他出库单运输！&quot;);
+                throw new RuntimeException("产品：'" + good.getGoodsName() + "' 库存不足，请选择其他出库单运输！");
             }
             inventoryDetails.setInventoryQuantity(NumberUtil.sub(inventoryQuantity, NumberUtil.toBigDecimal(1)));
             inventoryDetails.setOutStoreDate(new Date());
@@ -295,12 +290,12 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
                             .eq(TStorehouseDetails::getSpecification, inventoryDetails.getSpecification())
             );
             if(tStorehouseDetails == null) {
-                throw new RuntimeException(&quot;库存中不存在&#39;&quot; + good.getGoodsName() + &quot;&#39;产品，请选择其他出库单！&quot;);
+                throw new RuntimeException("库存中不存在'" + good.getGoodsName() + "'产品，请选择其他出库单！");
             }
             BigDecimal inventoryQuantity1 = tStorehouseDetails.getInventoryQuantity();
-            if (inventoryQuantity1.compareTo(NumberUtil.toBigDecimal(1)) &lt; 0) {
+            if (inventoryQuantity1.compareTo(NumberUtil.toBigDecimal(1)) < 0) {
                 // 库存不足，出库失败
-                throw new RuntimeException(&quot;产品：&#39;&quot; + good.getGoodsName() + &quot;&#39; 库存不足，请选择其他出库单！&quot;);
+                throw new RuntimeException("产品：'" + good.getGoodsName() + "' 库存不足，请选择其他出库单！");
             }
             tStorehouseDetails.setInventoryQuantity(NumberUtil.sub(inventoryQuantity1, NumberUtil.toBigDecimal(1)));
             tStorehouseDetailsMapper.updateById(tStorehouseDetails);
@@ -309,7 +304,7 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
 
     @Override
     @Transactional
-    public synchronized void productInByIdentifier(List&lt;TGoods&gt; goods) {
+    public synchronized void productInByIdentifier(List<TGoods> goods) {
         for (TGoods good : goods) {
             // 成品唯一识别码
             String identifier = good.getBatchNumber();
@@ -340,36 +335,36 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
      */
     private synchronized void productOut(TInOutRecord tInOutRecord) {
         //通过唯一标识出库
-        List&lt;TInOutRecordBody&gt; inOutRecordBodyList = tInOutRecord.getInOutRecordBodyList();
+        List<TInOutRecordBody> inOutRecordBodyList = tInOutRecord.getInOutRecordBodyList();
         if (CollUtil.isNotEmpty(inOutRecordBodyList)) {
             for (TInOutRecordBody tInOutRecordBody : inOutRecordBodyList) {
                 String identifier = tInOutRecordBody.getIdentifier();
                 // 减去库存
                 BigDecimal quantityInventory = tInOutRecordBody.getQuantityInventory();
                 TStorehouseDetails tStorehouseDetails = tStorehouseDetailsMapper.selectOne(
-                        new LambdaQueryWrapper&lt;TStorehouseDetails&gt;()
-                                .eq(TStorehouseDetails::getDelFlag, &quot;0&quot;)
+                        new LambdaQueryWrapper<TStorehouseDetails>()
+                                .eq(TStorehouseDetails::getDelFlag, "0")
                                 .eq(TStorehouseDetails::getIdentifier, identifier)
                 );
                 if (tStorehouseDetails != null) {
                     Integer count = tInOutRecordBodyMapper.selectCount(
-                            new LambdaQueryWrapper&lt;TInOutRecordBody&gt;()
+                            new LambdaQueryWrapper<TInOutRecordBody>()
                                     .eq(TInOutRecordBody::getIdentifier, identifier)
-                                    .eq(TInOutRecordBody::getDelFlag, &quot;0&quot;)
+                                    .eq(TInOutRecordBody::getDelFlag, "0")
                                     .eq(TInOutRecordBody::getOperateType, tInOutRecord.getOperateType())
                     );
                     if (count != 0) {
-                        throw new RuntimeException(&quot;您选择的成品：&#39;&quot; + tStorehouseDetails.getName() + &quot;&#39;,唯一识别号：&quot; + tStorehouseDetails.getIdentifier() + &quot;, 已存在出库单，请勿重复操作！&quot;);
+                        throw new RuntimeException("您选择的成品：'" + tStorehouseDetails.getName() + "',唯一识别号：" + tStorehouseDetails.getIdentifier() + ", 已存在出库单，请勿重复操作！");
                     }
                     BigDecimal inventoryQuantity = tStorehouseDetails.getInventoryQuantity();
-                    if (inventoryQuantity.compareTo(quantityInventory) &lt; 0) {
+                    if (inventoryQuantity.compareTo(quantityInventory) < 0) {
                         // 库存不足，出库失败
-                        throw new RuntimeException(&quot;产品：&#39;&quot; + tInOutRecordBody.getName() + &quot;&#39; 库存不足，出库失败！&quot;);
+                        throw new RuntimeException("产品：'" + tInOutRecordBody.getName() + "' 库存不足，出库失败！");
                     }
                     tStorehouseDetails.setInventoryQuantity(NumberUtil.sub(inventoryQuantity, quantityInventory));
                     tStorehouseDetailsMapper.updateById(tStorehouseDetails);
                 } else {
-                    throw new RuntimeException(&quot;库存中不存在&#39;&quot; + tInOutRecordBody.getName() + &quot;&#39;产品，出库失败！&quot;);
+                    throw new RuntimeException("库存中不存在'" + tInOutRecordBody.getName() + "'产品，出库失败！");
                 }
             }
         }
@@ -379,24 +374,24 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
      * 材料出库
      */
     private synchronized void purchaseOut(TInOutRecord tInOutRecord) {
-        List&lt;TInOutRecordBody&gt; inOutRecordBodyList = tInOutRecord.getInOutRecordBodyList();
-        Map&lt;String, List&lt;TInOutRecordBody&gt;&gt; map = inOutRecordBodyList.stream().filter(a -&gt; new BigDecimal(0).compareTo(a.getActQuantity()) &lt; 0).collect(Collectors.groupingBy(TInOutRecordBody::getAssociatedNo));
+        List<TInOutRecordBody> inOutRecordBodyList = tInOutRecord.getInOutRecordBodyList();
+        Map<String, List<TInOutRecordBody>> map = inOutRecordBodyList.stream().filter(a -> new BigDecimal(0).compareTo(a.getActQuantity()) < 0).collect(Collectors.groupingBy(TInOutRecordBody::getAssociatedNo));
         for (String associateNo : map.keySet()) {
             // 回填领料单信息
             TMaterialPickingNew tpn = new TMaterialPickingNew();
             tpn.setManager(tInOutRecord.getReviewer());
             tpn.setReviewer(tInOutRecord.getApplicant());
-            tpn.setDateTime(DateUtil.format(new Date(), &quot;yyyy-MM-dd&quot;));
+            tpn.setDateTime(DateUtil.format(new Date(), "yyyy-MM-dd"));
             tpn.setNo(associateNo);
             //如果点击出库单的备货按钮 则会传0，正常材料出库字段为空 cj-20230328
-            if(null!=tInOutRecord.getOutboundOrderStatus()&amp;&amp;&quot;0&quot;.equals(tInOutRecord.getOutboundOrderStatus())){
-                tpn.setProductStatus(&quot;2&quot;);//将领料单状态修改为已备货
+            if(null!=tInOutRecord.getOutboundOrderStatus()&&"0".equals(tInOutRecord.getOutboundOrderStatus())){
+                tpn.setProductStatus("2");//将领料单状态修改为已备货
             }else{
-                tpn.setProductStatus(&quot;&quot;);
+                tpn.setProductStatus("");
             }
             materialPickingNewService.updateByNo(tpn);
             // 出库
-            List&lt;TInOutRecordBody&gt; tInOutRecordBodies = map.get(associateNo);
+            List<TInOutRecordBody> tInOutRecordBodies = map.get(associateNo);
             for (TInOutRecordBody tInOutRecordBody : tInOutRecordBodies) {
                 String model = tInOutRecordBody.getModel();
                 String name = tInOutRecordBody.getName();
@@ -406,7 +401,7 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
                 BigDecimal actQuantity = tInOutRecordBody.getActQuantity();
                 // 出库， 库存主表，判断库存是否充足。如果充足，主表直接减数量，明细 根据 入库时间 先进先出规则扣减库存数量
                 // 1. 主表库存是否充足
-                LambdaQueryWrapper&lt;TStorehouseDetails&gt; qw = Wrappers
+                LambdaQueryWrapper<TStorehouseDetails> qw = Wrappers
                         .lambdaQuery(TStorehouseDetails.class)
                         .eq(TStorehouseDetails::getModel, model)
                         .eq(TStorehouseDetails::getName, name)
@@ -415,7 +410,7 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
                         .ge(TStorehouseDetails::getInventoryQuantity, actQuantity);
                 TStorehouseDetails tStorehouseDetails = tStorehouseDetailsMapper.selectOne(qw);
                 if (tStorehouseDetails == null) {
-                    String msg = StrUtil.format(&quot;编码:{}, 名称:{}, 规格:{}, 单位:{}, 的材料库存不足，出库失败！&quot;, model, name, specification, unit);
+                    String msg = StrUtil.format("编码:{}, 名称:{}, 规格:{}, 单位:{}, 的材料库存不足，出库失败！", model, name, specification, unit);
                     throw new RuntimeException(msg);
                 }
                 // 2. 扣减主表库存数量
@@ -423,15 +418,15 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
                 tStorehouseDetails.setInventoryQuantity(num);
                 tStorehouseDetailsMapper.updateById(tStorehouseDetails);
                 // 3. 库存明细表根据 入库时间 先进先出规则扣减库存数量
-                List&lt;TInventoryDetails&gt; inventoryDetails = tInventoryDetailsService.getInventoryDetails(model, name, specification, tInOutRecord.getInventoryType());
+                List<TInventoryDetails> inventoryDetails = tInventoryDetailsService.getInventoryDetails(model, name, specification, tInOutRecord.getInventoryType());
                 if (CollUtil.isEmpty(inventoryDetails)) {
-                    String msg = StrUtil.format(&quot;编码:{}, 名称:{}, 规格:{}, 单位:{}, 的材料库存不足，出库失败！&quot;, model, name, specification, unit);
+                    String msg = StrUtil.format("编码:{}, 名称:{}, 规格:{}, 单位:{}, 的材料库存不足，出库失败！", model, name, specification, unit);
                     throw new RuntimeException(msg);
                 }
                 for (TInventoryDetails inventoryDetail : inventoryDetails) {
                     BigDecimal inventoryQuantity = inventoryDetail.getInventoryQuantity();
                     BigDecimal outQuantity = inventoryDetail.getOutQuantity();
-                    if (actQuantity.compareTo(inventoryQuantity) &lt;= 0) {
+                    if (actQuantity.compareTo(inventoryQuantity) <= 0) {
                         inventoryDetail.setInventoryQuantity(NumberUtil.sub(inventoryQuantity, actQuantity));
                         // 已出库数量
                         inventoryDetail.setOutQuantity(NumberUtil.add(outQuantity, actQuantity));
@@ -451,7 +446,7 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
                 // 要唯一确定该材料，需要 no、productName、model、specification、unit 字段
                 // tInOutRecordBody 中的 associateNo 对应 tMaterialPickingListNew 的 no
                 // tInOutRecordBody 中的 model 对应 tMaterialPickingListNew 的 componentItemNumber
-                LambdaQueryWrapper&lt;TMaterialPickingListNew&gt; queryWrapper = Wrappers
+                LambdaQueryWrapper<TMaterialPickingListNew> queryWrapper = Wrappers
                         .lambdaQuery(TMaterialPickingListNew.class)
                         .eq(TMaterialPickingListNew::getNo, tInOutRecordBody.getAssociatedNo())
                         .eq(TMaterialPickingListNew::getProductName, tInOutRecordBody.getName())
@@ -464,9 +459,9 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
                 tMaterialPickingListNew.setReturnableQuantity(tInOutRecordBody.getActQuantity());
                 tMaterialPickingListNewMapper.updateTMaterialPickingListNew(tMaterialPickingListNew);
             }
-            TMaterialPickingNew tMaterialPickingNew = tMaterialPickingNewMapper.selectOne(new LambdaQueryWrapper&lt;TMaterialPickingNew&gt;().eq(TMaterialPickingNew::getNo, associateNo));
+            TMaterialPickingNew tMaterialPickingNew = tMaterialPickingNewMapper.selectOne(new LambdaQueryWrapper<TMaterialPickingNew>().eq(TMaterialPickingNew::getNo, associateNo));
             if (tMaterialPickingNew != null) {
-                tMaterialPickingNew.setProductStatus(&quot;1&quot;);
+                tMaterialPickingNew.setProductStatus("1");
                 tMaterialPickingNewMapper.updateById(tMaterialPickingNew);
             }
         }
@@ -490,14 +485,14 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
             // 成品采购入库不直接入库，自动生成任务单-加工记录，后去质检再入库
             TWorkTask workTask = new TWorkTask();
             // 不让列表中查询到
-            workTask.setDelFlag(&quot;2&quot;);
-            workTask.setDispatchPerson(&quot;系统管理员&quot;);
+            workTask.setDelFlag("2");
+            workTask.setDispatchPerson("系统管理员");
             workTask.setDispatchTime(new Date());
             TWorkTaskProduction production = new TWorkTaskProduction();
             production.setBakOne(Convert.toStr(productOrderListId));
             // 图号
             String model = tInOutRecordBody.getModel();
-            List&lt;TProductDrawing&gt; tProductDrawings = productDrawingService.selectTProductDrawingListByProductCode(model);
+            List<TProductDrawing> tProductDrawings = productDrawingService.selectTProductDrawingListByProductCode(model);
             TProductDrawing tProductDrawing = tProductDrawings.get(0);
             production.setDrawingNo(tProductDrawing.getDrawingCode());
             production.setPlanStartTime(new Date());
@@ -510,24 +505,24 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
             production.setProductionCode(orderList.getProductionOrderCode());
             workTask.setTWorkTaskProduction(production);
             TWorkTaskList taskList = new TWorkTaskList();
-            taskList.setBakOne(&quot;1&quot;);
+            taskList.setBakOne("1");
             taskList.setQuantity(Convert.toInt(tInOutRecordBody.getQuantityInventory()));
             taskList.setDispatchedQuantity(Convert.toInt(tInOutRecordBody.getQuantityInventory()));
             taskList.setNeedQuantity(Convert.toInt(tInOutRecordBody.getQuantityInventory()));
             taskList.setPlanStartTime(new Date());
             taskList.setPlanEndTime(new Date());
             // 根据图号查询最后一道工艺
-            List&lt;TTechnologicalProcess&gt; processes = technologicalProcessMapper.selectTTechnologicalProcessListByDrawingCode(tProductDrawing.getDrawingCode());
-            List&lt;TTechnologicalProcess&gt; processList = processes.stream().filter(a -&gt; StrUtil.equals(&quot;0&quot;, a.getIsStopProcess())).collect(Collectors.toList());
+            List<TTechnologicalProcess> processes = technologicalProcessMapper.selectTTechnologicalProcessListByDrawingCode(tProductDrawing.getDrawingCode());
+            List<TTechnologicalProcess> processList = processes.stream().filter(a -> StrUtil.equals("0", a.getIsStopProcess())).collect(Collectors.toList());
             if(CollUtil.isEmpty(processList)) {
-                throw new RuntimeException(&quot;未找到该产品的最后一道工序！&quot;);
+                throw new RuntimeException("未找到该产品的最后一道工序！");
             }
             TTechnologicalProcess process = processList.get(0);
             String roles = process.getRoles();
-            String operatorPerson = &quot;&quot;;
+            String operatorPerson = "";
             if(StrUtil.isNotBlank(roles)) {
-                String[] rolesArr = roles.split(&quot;,&quot;);
-                List&lt;SysUser&gt; userByRoleIds = userMapper.getUserByRoleIds(rolesArr);
+                String[] rolesArr = roles.split(",");
+                List<SysUser> userByRoleIds = userMapper.getUserByRoleIds(rolesArr);
                 if(CollUtil.isNotEmpty(userByRoleIds)) {
                     operatorPerson = userByRoleIds.get(0).getJobNumber();
                     taskList.setOperatorPerson(operatorPerson);
@@ -536,8 +531,8 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
             }
             taskList.setProcessName(process.getProcessName());
             taskList.setProcessCode(process.getProcessCode());
-            List&lt;String&gt; identifierList = tInOutRecordBody.getIdentifierList();
-            List&lt;TWorkTaskListNo&gt; workTaskListNos = identifierList.stream().map(a -&gt; {
+            List<String> identifierList = tInOutRecordBody.getIdentifierList();
+            List<TWorkTaskListNo> workTaskListNos = identifierList.stream().map(a -> {
                 TWorkTaskListNo no = new TWorkTaskListNo();
                 no.setContractNo(contractNo);
                 no.setProjectName(projectName);
@@ -547,16 +542,16 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
                 return no;
             }).collect(Collectors.toList());
             taskList.setWorkTaskListNos(workTaskListNos);
-            List&lt;TWorkTaskList&gt; list = new ArrayList&lt;&gt;();
+            List<TWorkTaskList> list = new ArrayList<>();
             list.add(taskList);
             workTask.setTWorkTaskLists(list);
-            workTask.setCreatePickingFlag(&quot;0&quot;);
+            workTask.setCreatePickingFlag("0");
             workTaskService.addTask(workTask);
             // 生成加工记录主表
             for (String s : identifierList) {
                 TAppProcessRecord record = new TAppProcessRecord();
                 record.setTaskNo(workTask.getTaskNo());
-                List&lt;TWorkTaskList&gt; tWorkTaskLists = workTask.getTWorkTaskLists();
+                List<TWorkTaskList> tWorkTaskLists = workTask.getTWorkTaskLists();
                 TWorkTaskList taskList1 = tWorkTaskLists.get(0);
                 record.setWorkTaskListId(taskList1.getId());
                 record.setProcessCode(taskList1.getProcessCode());
@@ -565,10 +560,10 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
                 record.setOperatorPerson(operatorPerson);
                 record.setOperatorTime(new Date());
                 // 如果该工序不需要质检，则跳过质检，直接编程质检通过
-                if(StrUtil.equals(&quot;1&quot;, process.getIsInspect())) {
-                    record.setStatus(&quot;2&quot;);
+                if(StrUtil.equals("1", process.getIsInspect())) {
+                    record.setStatus("2");
                 } else {
-                    record.setStatus(&quot;0&quot;);
+                    record.setStatus("0");
                 }
                 record.setCreateBy(SecurityUtils.getUsername());
                 appProcessRecordMapper.insert(record);
@@ -596,28 +591,28 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
      * @param tInOutRecord
      */
     private synchronized void productPurchaseIn1(TInOutRecord tInOutRecord){
-        List&lt;TInOutRecordBody&gt; inOutRecordBodyList = tInOutRecord.getInOutRecordBodyList();
-        List&lt;TStorehouseDetails&gt; tStorehouseDetails = new ArrayList&lt;&gt;();
+        List<TInOutRecordBody> inOutRecordBodyList = tInOutRecord.getInOutRecordBodyList();
+        List<TStorehouseDetails> tStorehouseDetails = new ArrayList<>();
         // 库存明细
-        List&lt;TProductionListNo&gt; list = new ArrayList&lt;&gt;();
-        List&lt;TInventoryDetails&gt; inventoryDetailsList = new ArrayList&lt;&gt;();
+        List<TProductionListNo> list = new ArrayList<>();
+        List<TInventoryDetails> inventoryDetailsList = new ArrayList<>();
         if (CollUtil.isNotEmpty(inOutRecordBodyList)) {
-            Map&lt;String, InOutRecordVo&gt; totalMap = new HashMap&lt;&gt;();
+            Map<String, InOutRecordVo> totalMap = new HashMap<>();
             for (TInOutRecordBody tInOutRecordBody : inOutRecordBodyList) {
-                if (new BigDecimal(0).compareTo(tInOutRecordBody.getQuantityInventory()) &gt;= 0) {
+                if (new BigDecimal(0).compareTo(tInOutRecordBody.getQuantityInventory()) >= 0) {
                     continue;
                 }
                 String name = tInOutRecordBody.getName();
                 String model = tInOutRecordBody.getModel();
                 String specification = tInOutRecordBody.getSpecification();
                 //key
-                String key = name + &quot;:&quot; + specification + &quot;:&quot; + model;
+                String key = name + ":" + specification + ":" + model;
                 InOutRecordVo inOutRecordVo = totalMap.get(key);
                 BigDecimal quantityInventory = tInOutRecordBody.getQuantityInventory();
                 int quantity = Convert.toInt(quantityInventory);
-                List&lt;String&gt; identifierList = tInOutRecordBody.getIdentifierList();
+                List<String> identifierList = tInOutRecordBody.getIdentifierList();
                 if(quantity != identifierList.size()) {
-                    throw new RuntimeException(&quot;入库数量和成品编号数量不等，请检查数据！&quot;);
+                    throw new RuntimeException("入库数量和成品编号数量不等，请检查数据！");
                 }
                 if (inOutRecordVo == null) {
                     inOutRecordVo = new InOutRecordVo();
@@ -671,7 +666,7 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
                 for (TStorehouseDetails tStorehouseDetail : tStorehouseDetails) {
                     //查询条件为 仓库id+名称+型号+
                     TStorehouseDetails tStorehouseDetails1 = tStorehouseDetailsMapper.selectOne(
-                            new LambdaQueryWrapper&lt;TStorehouseDetails&gt;()
+                            new LambdaQueryWrapper<TStorehouseDetails>()
                                     .eq(TStorehouseDetails::getName, tStorehouseDetail.getName())
                                     .eq(TStorehouseDetails::getModel, tStorehouseDetail.getModel())
                                     .eq(TStorehouseDetails::getSpecification, tStorehouseDetail.getSpecification())
@@ -693,7 +688,7 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
                 productionListNoService.saveBatch(list);
             }
         } else {
-            throw new RuntimeException(&quot;入库清单不能为空！&quot;);
+            throw new RuntimeException("入库清单不能为空！");
         }
     }
 
@@ -701,22 +696,22 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
      * 生产入库或退货入库
      */
     private synchronized void productInsert(TInOutRecord tInOutRecord) {
-        List&lt;TInOutRecordBody&gt; inOutRecordBodyList = tInOutRecord.getInOutRecordBodyList();
-        List&lt;TStorehouseDetails&gt; tStorehouseDetails = new ArrayList&lt;&gt;();
+        List<TInOutRecordBody> inOutRecordBodyList = tInOutRecord.getInOutRecordBodyList();
+        List<TStorehouseDetails> tStorehouseDetails = new ArrayList<>();
         // 库存明细
-        List&lt;TInventoryDetails&gt; inventoryDetailsList = new ArrayList&lt;&gt;();
-        HashSet&lt;String&gt; hashSet = new HashSet&lt;&gt;();
+        List<TInventoryDetails> inventoryDetailsList = new ArrayList<>();
+        HashSet<String> hashSet = new HashSet<>();
         if (CollUtil.isNotEmpty(inOutRecordBodyList)) {
-            Map&lt;String, InOutRecordVo&gt; totalMap = new HashMap&lt;&gt;();
+            Map<String, InOutRecordVo> totalMap = new HashMap<>();
             for (TInOutRecordBody tInOutRecordBody : inOutRecordBodyList) {
-                if (new BigDecimal(0).compareTo(tInOutRecordBody.getQuantityInventory()) &gt;= 0) {
+                if (new BigDecimal(0).compareTo(tInOutRecordBody.getQuantityInventory()) >= 0) {
                     continue;
                 }
                 String name = tInOutRecordBody.getName();
                 String model = tInOutRecordBody.getModel();
                 String specification = tInOutRecordBody.getSpecification();
                 //key
-                String key = name + &quot;:&quot; + specification + &quot;:&quot; + model;
+                String key = name + ":" + specification + ":" + model;
                 InOutRecordVo inOutRecordVo = totalMap.get(key);
                 if (inOutRecordVo == null) {
                     inOutRecordVo = new InOutRecordVo();
@@ -764,7 +759,7 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
                 for (TStorehouseDetails tStorehouseDetail : tStorehouseDetails) {
                     //查询条件为 仓库id+名称+型号+
                     TStorehouseDetails tStorehouseDetails1 = tStorehouseDetailsMapper.selectOne(
-                            new LambdaQueryWrapper&lt;TStorehouseDetails&gt;()
+                            new LambdaQueryWrapper<TStorehouseDetails>()
                                     .eq(TStorehouseDetails::getName, tStorehouseDetail.getName())
                                     .eq(TStorehouseDetails::getModel, tStorehouseDetail.getModel())
                                     .eq(TStorehouseDetails::getSpecification, tStorehouseDetail.getSpecification())
@@ -784,15 +779,15 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
             //将对于的成品标记成已入库
             tProductInformationMapper.updateStatus(hashSet);
         } else {
-            throw new RuntimeException(&quot;入库清单不能为空！&quot;);
+            throw new RuntimeException("入库清单不能为空！");
         }
 
         // 录入产能
         // 如果是生产入库，将该入库记录列入产能分析表t_Capacity
-        if (&quot;2&quot;.equals(tInOutRecord.getOperateType())) {
+        if ("2".equals(tInOutRecord.getOperateType())) {
             // 从 tInOutRecord 中获取入库时间，并将时间切分为年/月/日
             Date warehousingTime = tInOutRecord.getWarehousingTime();
-            SimpleDateFormat format = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             String transformDate = format.format(warehousingTime);
             String year = transformDate.substring(0, 4);
             String month = transformDate.substring(5, 7);
@@ -803,7 +798,7 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
             String userName = tInOutRecord.getApplicant();
             String jobNumber = userService.selectUserByNickName(userName).getJobNumber();
 
-            inOutRecordBodyList.forEach(body -&gt; {
+            inOutRecordBodyList.forEach(body -> {
                 // 通过 TInOutRecordBody 的产品名称，产品编码，规格得到该产品的产品类型，并获取产品的单位和入库数量
                 TProductInfo product = new TProductInfo();
                 product.setProductName(body.getName());     // 产品名称
@@ -828,7 +823,7 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
                 capacityUser.setMonth(month);
                 capacityUser.setDay(day);
                 // 生产入库的工艺名称统一规定为 入库
-                capacityUser.setProcessName(&quot;入库&quot;);
+                capacityUser.setProcessName("入库");
                 capacityUser.setUserName(userName);
                 capacityUser.setJobNumber(jobNumber);
                 capacityUser.setQuantity(body.getQuantityInventory());
@@ -842,15 +837,15 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
      */
     private synchronized void purchaseInsert(TInOutRecord tInOutRecord) {
         //采购入库，将数量对应添加到明细仓库中去
-        List&lt;TInOutRecordBody&gt; inOutRecordBodyList = tInOutRecord.getInOutRecordBodyList();
+        List<TInOutRecordBody> inOutRecordBodyList = tInOutRecord.getInOutRecordBodyList();
 
-        List&lt;TStorehouseDetails&gt; tStorehouseDetails = new ArrayList&lt;&gt;();
+        List<TStorehouseDetails> tStorehouseDetails = new ArrayList<>();
         // 库存明细
-        List&lt;TInventoryDetails&gt; inventoryDetailsList = new ArrayList&lt;&gt;();
+        List<TInventoryDetails> inventoryDetailsList = new ArrayList<>();
         if (CollUtil.isNotEmpty(inOutRecordBodyList)) {
-            Map&lt;String, InOutRecordVo&gt; totalMap = new HashMap&lt;&gt;();
+            Map<String, InOutRecordVo> totalMap = new HashMap<>();
             for (TInOutRecordBody tInOutRecordBody : inOutRecordBodyList) {
-                if(new BigDecimal(0).compareTo(tInOutRecordBody.getQuantityInventory()) &gt;= 0) {
+                if(new BigDecimal(0).compareTo(tInOutRecordBody.getQuantityInventory()) >= 0) {
                     continue;
                 }
                 //名称
@@ -862,7 +857,7 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
                 // 供应商
                 // String supplierCode = tInOutRecordBody.getSupplierCode();
                 //key
-                String key = name + &quot;:&quot; + specification + &quot;:&quot; + model;
+                String key = name + ":" + specification + ":" + model;
                 InOutRecordVo inOutRecordVo = totalMap.get(key);
                 if (inOutRecordVo == null) {
                     inOutRecordVo = new InOutRecordVo();
@@ -880,7 +875,7 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
                 TMaterialInfo tMaterialInfo = tMaterialInfoMapper.selectTMaterialInfoByMaterialCode(model);
                 String materialType = tMaterialInfo.getMaterialType();
                 // 材料
-                if(&quot;1&quot;.equals(materialType)) {
+                if("1".equals(materialType)) {
                     // 库存明细
                     TInventoryDetails inventoryDetails = new TInventoryDetails();
                     inventoryDetails.setName(name);
@@ -895,11 +890,11 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
                     String batchNo = redisCache.generateOrderNum();
                     inventoryDetails.setBatchNumber(batchNo);
                     inventoryDetailsList.add(inventoryDetails);
-                } else if(&quot;2&quot;.equals(materialType)){
+                } else if("2".equals(materialType)){
                     // 半成品
                     BigDecimal quantityInventory = tInOutRecordBody.getQuantityInventory();
                     Integer integer = Convert.toInt(quantityInventory);
-                    for (int i = 0; i &lt; integer; i++) {
+                    for (int i = 0; i < integer; i++) {
                         TInventoryDetails inventoryDetails = new TInventoryDetails();
                         inventoryDetails.setName(name);
                         inventoryDetails.setModel(model);
@@ -913,7 +908,7 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
                         String batchNo = redisCache.generateOrderNum();
                         inventoryDetails.setBatchNumber(batchNo);
                         // app端半成品入库，不走如下逻辑
-                        if( (&quot;0&quot;.equals(tInOutRecord.getOperateType()) || &quot;8&quot;.equals(tInOutRecord.getOperateType())) &amp;&amp; !&quot;1&quot;.equals(tInOutRecord.getIsCreateIdentifier()) ) {
+                        if( ("0".equals(tInOutRecord.getOperateType()) || "8".equals(tInOutRecord.getOperateType())) && !"1".equals(tInOutRecord.getIsCreateIdentifier()) ) {
                             // 采购入库和其他入库，自动生成半成品的唯一编号
                             String snowId = SnowIdUtils.getSnowId();
                             inventoryDetails.setIdentifier(snowId);
@@ -944,13 +939,13 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
                 tStorehouseDetails.add(tStorehouseDetail);
             }
         } else {
-            throw new RuntimeException(&quot;入库清单不能为空！&quot;);
+            throw new RuntimeException("入库清单不能为空！");
         }
         if (CollUtil.isNotEmpty(tStorehouseDetails)) {
             for (TStorehouseDetails tStorehouseDetail : tStorehouseDetails) {
                 //查询条件为 仓库id+名称+型号+
                 TStorehouseDetails tStorehouseDetails1 = tStorehouseDetailsMapper.selectOne(
-                        new LambdaQueryWrapper&lt;TStorehouseDetails&gt;()
+                        new LambdaQueryWrapper<TStorehouseDetails>()
                                 .eq(TStorehouseDetails::getName, tStorehouseDetail.getName())
                                 .eq(TStorehouseDetails::getModel, tStorehouseDetail.getModel())
                                 .eq(TStorehouseDetails::getSpecification, tStorehouseDetail.getSpecification())
@@ -968,16 +963,16 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
             }
         }
         //若是采购入库，则采购入库完成后修改采购单的对应入库状态
-        if (&quot;0&quot;.equals(tInOutRecord.getOperateType())) {
+        if ("0".equals(tInOutRecord.getOperateType())) {
             String associatedNo = tInOutRecord.getAssociatedNo();
-            TMaterialPickingNew tMaterialPickingNew = tMaterialPickingNewMapper.selectOne(new LambdaQueryWrapper&lt;TMaterialPickingNew&gt;().eq(TMaterialPickingNew::getNo, associatedNo));
+            TMaterialPickingNew tMaterialPickingNew = tMaterialPickingNewMapper.selectOne(new LambdaQueryWrapper<TMaterialPickingNew>().eq(TMaterialPickingNew::getNo, associatedNo));
             if (tMaterialPickingNew != null) {
-                tMaterialPickingNew.setProductStatus(&quot;1&quot;);
+                tMaterialPickingNew.setProductStatus("1");
                 tMaterialPickingNewMapper.updateById(tMaterialPickingNew);
             }
             // 更修材料供应商历史价格
-            List&lt;TMaterialSupplier&gt; updateList = new ArrayList&lt;&gt;();
-            List&lt;TMaterialSupplier&gt; insertList = new ArrayList&lt;&gt;();
+            List<TMaterialSupplier> updateList = new ArrayList<>();
+            List<TMaterialSupplier> insertList = new ArrayList<>();
             for (TInOutRecordBody tInOutRecordBody : tInOutRecord.getInOutRecordBodyList()) {
                 //名称
                 String name = tInOutRecordBody.getName();
@@ -988,21 +983,21 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
                 // 供应商
                 String supplierCode = tInOutRecordBody.getSupplierCode();
                 BigDecimal unitPrice = tInOutRecordBody.getUnitPrice();
-                List&lt;TMaterialInfo&gt; tMaterialInfos = tMaterialInfoMapper.selectList(Wrappers.lambdaQuery(TMaterialInfo.class)
+                List<TMaterialInfo> tMaterialInfos = tMaterialInfoMapper.selectList(Wrappers.lambdaQuery(TMaterialInfo.class)
                         .eq(TMaterialInfo::getMaterialCode, model)
                         .eq(TMaterialInfo::getMaterialName, name)
                         .eq(TMaterialInfo::getMaterialModel, specification)
                 );
-                List&lt;Supplier&gt; suppliers = supplierMapper.selectList(Wrappers.lambdaQuery(Supplier.class).eq(Supplier::getSupplierCode, supplierCode));
-                if(CollUtil.isNotEmpty(tMaterialInfos) &amp;&amp; CollUtil.isNotEmpty(suppliers)) {
+                List<Supplier> suppliers = supplierMapper.selectList(Wrappers.lambdaQuery(Supplier.class).eq(Supplier::getSupplierCode, supplierCode));
+                if(CollUtil.isNotEmpty(tMaterialInfos) && CollUtil.isNotEmpty(suppliers)) {
                     TMaterialInfo tMaterialInfo = tMaterialInfos.get(0);
                     Long materialInfoId = tMaterialInfo.getId();
                     Supplier supplier = suppliers.get(0);
                     Long supplierId = supplier.getId();
-                    LambdaQueryWrapper&lt;TMaterialSupplier&gt; qw = Wrappers.lambdaQuery(TMaterialSupplier.class);
+                    LambdaQueryWrapper<TMaterialSupplier> qw = Wrappers.lambdaQuery(TMaterialSupplier.class);
                     qw.eq(TMaterialSupplier::getMaterialId, materialInfoId);
                     qw.eq(TMaterialSupplier::getSupplierId, supplierId);
-                    qw.eq(TMaterialSupplier::getDelFlag, &quot;0&quot;);
+                    qw.eq(TMaterialSupplier::getDelFlag, "0");
                     TMaterialSupplier tMaterialSupplier = tMaterialSupplierService.getOne(qw);
                     if(tMaterialSupplier != null) {
                         tMaterialSupplier.setPrice(unitPrice);
@@ -1013,7 +1008,7 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
                         tMaterialSupplier = new TMaterialSupplier();
                         tMaterialSupplier.setMaterialId(materialInfoId);
                         tMaterialSupplier.setSupplierId(supplierId);
-                        tMaterialSupplier.setMaterialSupplierCode(model + &quot;-&quot; + supplierCode);
+                        tMaterialSupplier.setMaterialSupplierCode(model + "-" + supplierCode);
                         tMaterialSupplier.setPrice(unitPrice);
                         tMaterialSupplier.setCreateBy(SecurityUtils.getUsername());
                         tMaterialSupplier.setCreateTime(new Date());
@@ -1032,13 +1027,13 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
         }
 
         //若是退料入库，需要修改该退料入库所选择的领料单下的材料可退料数量 returnableQuantity
-        if (&quot;1&quot;.equals(tInOutRecord.getOperateType())) {
-            List&lt;TInOutRecordBody&gt; inOutRecordBodies = tInOutRecord.getInOutRecordBodyList();
+        if ("1".equals(tInOutRecord.getOperateType())) {
+            List<TInOutRecordBody> inOutRecordBodies = tInOutRecord.getInOutRecordBodyList();
             for (TInOutRecordBody body : inOutRecordBodies) {
                 // 查询该 出入库记录对应的 领料单材料
                 // 通过 no, productName, ComponentItemNumber, specification, unit 来唯一确定
                 // 退料入库时， associatedNo 只有 tInOutRecord 中有，tInOutRecordBody 中没有
-                LambdaQueryWrapper&lt;TMaterialPickingListNew&gt; queryWrapper = Wrappers
+                LambdaQueryWrapper<TMaterialPickingListNew> queryWrapper = Wrappers
                         .lambdaQuery(TMaterialPickingListNew.class)
                         .eq(TMaterialPickingListNew::getNo, tInOutRecord.getAssociatedNo())
                         .eq(TMaterialPickingListNew::getProductName, body.getName())
@@ -1057,13 +1052,13 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
 
         // 若是其他入库，且tInOutRecordBody 中的 remark 字段 和 identifier 字段内容不为空且相同时，添加人均产能记录 -- 入库
         //（app端入库操作TAppProcessRecordServiceImpl.inStorage() 会使tInOutRecordBody 中的 remark 字段和 identifier 字段相同且不为空）
-        List&lt;TInOutRecordBody&gt; bodies = tInOutRecord.getInOutRecordBodyList();
-        if (&quot;8&quot;.equals(tInOutRecord.getOperateType())
-                &amp;&amp; bodies.get(0).getRemark() != null &amp;&amp; bodies.get(0).getIdentifier() != null
-                &amp;&amp; bodies.get(0).getRemark().equals(bodies.get(0).getIdentifier())) {
+        List<TInOutRecordBody> bodies = tInOutRecord.getInOutRecordBodyList();
+        if ("8".equals(tInOutRecord.getOperateType())
+                && bodies.get(0).getRemark() != null && bodies.get(0).getIdentifier() != null
+                && bodies.get(0).getRemark().equals(bodies.get(0).getIdentifier())) {
             // 从 tInOutRecord 中获取入库时间，并将时间切分为年/月/日
             Date warehousingTime = tInOutRecord.getWarehousingTime();
-            SimpleDateFormat format = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             String transformDate = format.format(warehousingTime);
             String year = transformDate.substring(0, 4);
             String month = transformDate.substring(5, 7);
@@ -1083,7 +1078,7 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
                 capacityUser.setMonth(month);
                 capacityUser.setDay(day);
                 // 入库的工艺名称统一规定为 入库
-                capacityUser.setProcessName(&quot;入库&quot;);
+                capacityUser.setProcessName("入库");
                 capacityUser.setUserName(userName);
                 capacityUser.setJobNumber(jobNumber);
                 capacityUser.setQuantity(body.getQuantityInventory());
@@ -1095,38 +1090,38 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
     /**
      * @param documentType 类型 （订单，领料，采购等）
      * @param count        返回生成的集合数量
-     * @param length       后面的序号是几位序号 如 length = 2 -&gt; 01  length = 4 -&gt;0001
+     * @param length       后面的序号是几位序号 如 length = 2 -> 01  length = 4 ->0001
      *                     通过单证类型创建批号
      * @return
      */
     @Override
-    public List&lt;String&gt; createBatchNumberByDocumentType(String documentType, int count, Integer length) {
-        List&lt;String&gt; result = new ArrayList&lt;&gt;();
+    public List<String> createBatchNumberByDocumentType(String documentType, int count, Integer length) {
+        List<String> result = new ArrayList<>();
         switch (documentType) {
             //订单
-            case &quot;DD&quot;:
-                return createBatchNumber(count, length, &quot;t_orders_new&quot;, &quot;order_number&quot;, 14, 2, 10, 11, 14, &quot;DD&quot;);
-            case &quot;SD&quot;:
-                return createBatchNumber(count, length, &quot;t_production_order&quot;, &quot;production_order_code&quot;, 14, 2, 10, 11, 14, &quot;SD&quot;);
+            case "DD":
+                return createBatchNumber(count, length, "t_orders_new", "order_number", 14, 2, 10, 11, 14, "DD");
+            case "SD":
+                return createBatchNumber(count, length, "t_production_order", "production_order_code", 14, 2, 10, 11, 14, "SD");
             //领料单
-            case &quot;LL&quot;:
-                return createBatchNumber(count, length, &quot;t_material_picking_new&quot;, &quot;no&quot;, 14, 2, 10, 11, 14, &quot;LL&quot;);
+            case "LL":
+                return createBatchNumber(count, length, "t_material_picking_new", "no", 14, 2, 10, 11, 14, "LL");
             // 领料单明细批号
-            case &quot;PH&quot;:
-                return createBatchNumber(count, length, &quot;t_material_picking_list_new&quot;, &quot;batch_number&quot;, 14, 2, 10, 11, 14, &quot;PH&quot;);
+            case "PH":
+                return createBatchNumber(count, length, "t_material_picking_list_new", "batch_number", 14, 2, 10, 11, 14, "PH");
             //采购单
-            case &quot;CG&quot;:
-                return createBatchNumber(count, length, &quot;t_purchase_order_header&quot;, &quot;ticket_no&quot;, 14, 2, 10, 11, 14, &quot;CG&quot;);
+            case "CG":
+                return createBatchNumber(count, length, "t_purchase_order_header", "ticket_no", 14, 2, 10, 11, 14, "CG");
             //工单
-            case &quot;GD&quot;:
-                return createBatchNumber(count, length, &quot;t_worksheets&quot;, &quot;work_number&quot;, 14, 2, 10, 11, 14, &quot;GD&quot;);
+            case "GD":
+                return createBatchNumber(count, length, "t_worksheets", "work_number", 14, 2, 10, 11, 14, "GD");
             //出入库
-            case &quot;inOutRecord&quot;:
-                return createBatchNumber(count, length, &quot;t_storehouse_details&quot;, &quot;batch_number&quot;, 12, 0, 8, 9, 12, &quot;&quot;);
-            case &quot;inOutRecordNo&quot;:
-                return createBatchNumber(count, length, &quot;t_in_out_record&quot;, &quot;single_number&quot;, 12, 0, 8, 9, 12, &quot;&quot;);
-            case &quot;WT&quot;:
-                return createBatchNumber(count, length, &quot;t_work_task&quot;, &quot;task_no&quot;, 14, 2, 10, 11, 14, &quot;WT&quot;);
+            case "inOutRecord":
+                return createBatchNumber(count, length, "t_storehouse_details", "batch_number", 12, 0, 8, 9, 12, "");
+            case "inOutRecordNo":
+                return createBatchNumber(count, length, "t_in_out_record", "single_number", 12, 0, 8, 9, 12, "");
+            case "WT":
+                return createBatchNumber(count, length, "t_work_task", "task_no", 14, 2, 10, 11, 14, "WT");
         }
         return result;
     }
@@ -1135,15 +1130,15 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
      * 创建批号
      */
     @Override
-    public List&lt;String&gt; createBatchNumber(int count, int digits, String tableName, String columnName, Integer lengths, int fromIndex, int toIndex, int lastFromIndex, int lastToIndex, String prefix) {
-        List&lt;String&gt; result = new ArrayList&lt;&gt;();
+    public List<String> createBatchNumber(int count, int digits, String tableName, String columnName, Integer lengths, int fromIndex, int toIndex, int lastFromIndex, int lastToIndex, String prefix) {
+        List<String> result = new ArrayList<>();
         //判断是否为空，或者位数不为10位，则序号从01开始
         String nowDateTime = DateUtils.dateTime();
         //先获取原来的循环到那个批号了
         String maxBatchNumber = tStorehouseDetailsMapper.getMaxBatchNumber(tableName, columnName, prefix + nowDateTime);
 
         if (maxBatchNumber == null || lengths != (maxBatchNumber.length())) {
-            for (int i = 0; i &lt; count; i++) {
+            for (int i = 0; i < count; i++) {
                 BigDecimal add = NumberUtil.add(new BigDecimal(0), i + 1);
                 result.add(prefix + nowDateTime + getNumber(add.intValue(), digits));
             }
@@ -1151,12 +1146,12 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
             String sub = StrUtil.sub(maxBatchNumber, fromIndex, toIndex);
             String subLast = StrUtil.sub(maxBatchNumber, lastFromIndex, lastToIndex);
             if (sub.equals(nowDateTime)) {
-                for (int i = 0; i &lt; count; i++) {
+                for (int i = 0; i < count; i++) {
                     BigDecimal add = NumberUtil.add(new BigDecimal(subLast), i + 1);
                     result.add(prefix + sub + getNumber(add.intValue(), digits));
                 }
             } else {
-                for (int i = 0; i &lt; count; i++) {
+                for (int i = 0; i < count; i++) {
                     BigDecimal add = NumberUtil.add(new BigDecimal(0), i + 1);
                     result.add(prefix + nowDateTime + getNumber(add.intValue(), digits));
                 }
@@ -1166,14 +1161,14 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
     }
 
     @Override
-    public List&lt;TPurchaseSingleDetailVo&gt; getTPurchaseSingleDetailByTicketNo(String ticketNo) {
-        List&lt;TPurchaseSingleDetailVo&gt; tPurchaseSingleDetailByTicketNo = tInOutRecordMapper.getTPurchaseSingleDetailByTicketNo(ticketNo);
-        return tPurchaseSingleDetailByTicketNo.stream().filter(vo -&gt; vo.getLaveQuantityInventoryed().compareTo(vo.getQuantityInventory()) &lt; 0).collect(Collectors.toList());
+    public List<TPurchaseSingleDetailVo> getTPurchaseSingleDetailByTicketNo(String ticketNo) {
+        List<TPurchaseSingleDetailVo> tPurchaseSingleDetailByTicketNo = tInOutRecordMapper.getTPurchaseSingleDetailByTicketNo(ticketNo);
+        return tPurchaseSingleDetailByTicketNo.stream().filter(vo -> vo.getLaveQuantityInventoryed().compareTo(vo.getQuantityInventory()) < 0).collect(Collectors.toList());
     }
     @Override
-    public List&lt;TPurchaseSingleDetailVo&gt; getTProductSingleDetailByTicketNo(String ticketNo) {
-        List&lt;TPurchaseSingleDetailVo&gt; tPurchaseSingleDetailByTicketNo = tInOutRecordMapper.getTProductSingleDetailByTicketNo(ticketNo);
-        return tPurchaseSingleDetailByTicketNo.stream().filter(vo -&gt; vo.getLaveQuantityInventoryed().compareTo(vo.getQuantityInventory()) &lt; 0).collect(Collectors.toList());
+    public List<TPurchaseSingleDetailVo> getTProductSingleDetailByTicketNo(String ticketNo) {
+        List<TPurchaseSingleDetailVo> tPurchaseSingleDetailByTicketNo = tInOutRecordMapper.getTProductSingleDetailByTicketNo(ticketNo);
+        return tPurchaseSingleDetailByTicketNo.stream().filter(vo -> vo.getLaveQuantityInventoryed().compareTo(vo.getQuantityInventory()) < 0).collect(Collectors.toList());
     }
 
     /**
@@ -1217,11 +1212,11 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
         switch (inputType) {
             case ADD:
                 tInOutRecord.setCreateTime(DateUtils.getNowDate());
-                tInOutRecord.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId() + &quot;&quot;);
+                tInOutRecord.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId() + "");
                 break;
             case UPDATE:
                 tInOutRecord.setUpdateTime(DateUtils.getNowDate());
-                tInOutRecord.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId() + &quot;&quot;);
+                tInOutRecord.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId() + "");
                 break;
             default:
                 break;
@@ -1235,14 +1230,14 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
     public int updateOutboundOrderStatus(String outboundOrderStatus, String transportCode) {
         // 从货物对象 获取出库单号
         TGoods tGoods = tGoodsMapper.selectOne(
-                new LambdaQueryWrapper&lt;TGoods&gt;()
+                new LambdaQueryWrapper<TGoods>()
                         .eq(TGoods::getTransportCode, transportCode)
-                        .eq(TGoods::getDelFlag, &quot;0&quot;)
+                        .eq(TGoods::getDelFlag, "0")
         );
         if (Objects.nonNull(tGoods)) {
             String outRecordNo = tGoods.getOutRecordNo();
             // 根据出库单号，将出库修改为 未出库
-            LambdaUpdateWrapper&lt;TInOutRecord&gt; uw = new LambdaUpdateWrapper&lt;&gt;();
+            LambdaUpdateWrapper<TInOutRecord> uw = new LambdaUpdateWrapper<>();
             uw.set(TInOutRecord::getOutboundOrderStatus, outboundOrderStatus).eq(TInOutRecord::getSingleNumber, outRecordNo);
             update(uw);
         }
@@ -1258,15 +1253,15 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
     @Transactional(rollbackFor = Exception.class)
     public int invalidate(Long id) {
         TInOutRecord byId = getById(id);
-        byId.setOutboundOrderStatus(&quot;3&quot;);
+        byId.setOutboundOrderStatus("3");
         updateById(byId);
-        List&lt;TInOutRecordBody&gt; tInOutRecordBodies = tInOutRecordBodyMapper.selectList(
+        List<TInOutRecordBody> tInOutRecordBodies = tInOutRecordBodyMapper.selectList(
                 Wrappers.lambdaQuery(TInOutRecordBody.class)
                         .eq(TInOutRecordBody::getTInOutRecordId, id)
-                        .eq(TInOutRecordBody::getDelFlag, &quot;0&quot;)
+                        .eq(TInOutRecordBody::getDelFlag, "0")
         );
         for (TInOutRecordBody tInOutRecordBody : tInOutRecordBodies) {
-            tProductInformationMapper.updateOutRecordFLag(tInOutRecordBody.getIdentifier(), &quot;0&quot;);
+            tProductInformationMapper.updateOutRecordFLag(tInOutRecordBody.getIdentifier(), "0");
             ordersNewListService.subOrAddOutQuantity(tInOutRecordBody, false);
         }
         return 1;
@@ -1277,7 +1272,5 @@ public class TInOutRecordServiceImpl extends ServiceImpl&lt;TInOutRecordMapper, 
         tProductInformationMapper.llOut(userName,remark,singleNumber);
     }
 }
-</code></pre>
-<p>&nbsp;</p>
-</body>
-</html>
+~~~
+
