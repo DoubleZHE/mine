@@ -1,6 +1,6 @@
 ## 索引
 
-![索引图](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E7%B4%A2%E5%BC%95%E5%9B%BE.png)
+![索引图](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E7%B4%A2%E5%BC%95%E5%9B%BE.png)
 
 什么是索引？
 
@@ -30,21 +30,21 @@
 
 特点：每个节点最多有两个子节点，小在左，大在右，数据随机性情况下树杈越明显。
 
-![二叉树示例1](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%A4%BA%E4%BE%8B1.png)
+![二叉树示例1](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%A4%BA%E4%BE%8B1.png)
 
 如果数据是按顺序依次进入：
 树的高度则会很高（就是一个链表结构），此时元素的查找效率就等于链表查询 $O_{(n)}$，数据检索效率极为低下。
 
 极端情况下，就是一个链表结构（如下图），此时元素的查找效率就等于连表查询 $O_{(n)}$。
 
-![二叉树示例2](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%A4%BA%E4%BE%8B2.png)
+![二叉树示例2](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%A4%BA%E4%BE%8B2.png)
 
 #### 红黑树（平衡二叉树）
 
 虽通过自旋平衡，子节点会自动分叉为 2 个分叉，从而减少树的高度，当数据有序插入时比二叉树数据检索性能更佳。
 但是如果数据量过大，节点个数就越多，树高度也会增高（也就是树的深度越深），增加磁盘 I/O 次数，影响查询效率。
 
-![平衡二叉树的旋转](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%97%8B%E8%BD%AC.gif)
+![平衡二叉树的旋转](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%97%8B%E8%BD%AC.gif)
 
 #### B- 树（平衡多路查找树）
 
@@ -53,12 +53,12 @@ B 树的出现可以解决树高度的问题。
 
 > MySQL 中是 16 阶平衡多路查找树，每个节点最多可以存储 15 个元素，最多有 16 个分支。
 
-![B 树（多路平衡二叉树）](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/B%20%E6%A0%91%EF%BC%88%E5%A4%9A%E8%B7%AF%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%89.png)
+![B 树（多路平衡二叉树）](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/B%20%E6%A0%91%EF%BC%88%E5%A4%9A%E8%B7%AF%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%89.png)
 
 B 树的节点可以包含有多个子节点，所以 **B 树是一棵多叉树**，它的每一个节点包含的最多子节点数量的称为 B 树的阶。
 如下图是一棵三阶的 B 树的插入过程：
 
-![B- Tree 插入过程](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/B-%20Tree%20%E6%8F%92%E5%85%A5%E8%BF%87%E7%A8%8B.gif)
+![B- Tree 插入过程](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/B-%20Tree%20%E6%8F%92%E5%85%A5%E8%BF%87%E7%A8%8B.gif)
 
 当一棵 3 阶的 B 树查找 7 这个元素是的流程：
 先从根节点出发，判断 7 在 4 和 8 之间，根据 P2 存储指针 6 的节点，判断 7 大于 6，最后指针找到叶子节点，也就找到了匹配 7 的键值。
@@ -79,7 +79,7 @@ B+ Tree 是在 B- Tree 基础上的一种优化，其更适合作存储索引结
 
 B+ Tree 结构图如下：
 
-![B+ Tree 结构图](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/B+%20Tree%20%E7%BB%93%E6%9E%84.png)
+![B+ Tree 结构图](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/B+%20Tree%20%E7%BB%93%E6%9E%84.png)
 
 ---
 
@@ -104,7 +104,7 @@ Hash 索引其实用的不多，最主要是因为最常见的存储引擎 InnoD
 
 在存储索引中，Memory 引擎支持 Hash 索引。
 
-![Hash 索引结构](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/Hash%20%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84.png)
+![Hash 索引结构](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/Hash%20%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84.png)
 
 #### Hash 索引优缺点
 
@@ -115,9 +115,9 @@ Hash 索引其实用的不多，最主要是因为最常见的存储引擎 InnoD
 
 按物理存储分类：InnoDB 得存储方式是聚集索引，MyISAM 的存储方式是非聚簇索引。
 
-![MyISAM 非聚簇索引结构](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/MyISAM%20%E9%9D%9E%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84.png)
+![MyISAM 非聚簇索引结构](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/MyISAM%20%E9%9D%9E%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84.png)
 
-![InnoDB 聚簇索引结构](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/InnoDB%20%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84.png)
+![InnoDB 聚簇索引结构](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/InnoDB%20%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84.png)
 
 #### 聚簇索引
 
@@ -153,7 +153,7 @@ ALTER TABLE users ADD INDEX index_age(age);
 -- MySQL会分别创建主键id的聚簇索引和age的二级索引
 ```
 
-![ID 主键索引和 Age 二级索引](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/ID%20%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95%E5%92%8C%20Age%20%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95.png)
+![ID 主键索引和 Age 二级索引](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/ID%20%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95%E5%92%8C%20Age%20%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95.png)
 
 在 MySQL 中主键索引的叶子节点存储整行数据，二级索引叶子节点存储主键的值。
 
@@ -164,7 +164,7 @@ ALTER TABLE users ADD INDEX index_age(age);
 SELECT * FROM users WHERE age = 35;
 ```
 
-![二级索引回表查询过程](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95%E5%9B%9E%E8%A1%A8%E6%9F%A5%E8%AF%A2%E8%BF%87%E7%A8%8B.png)
+![二级索引回表查询过程](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95%E5%9B%9E%E8%A1%A8%E6%9F%A5%E8%AF%A2%E8%BF%87%E7%A8%8B.png)
 
 由于查询条件是 name，所以会走 name 索引。整个过程大致分为以下步骤：
 
@@ -181,7 +181,7 @@ select id from users where age = 35;
 
 这次查询字段从 select * 变成 select id，查询条件不变，所以也会走 age 索引。
 
-![ID 主键索引和 Age 二级索引](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/ID%20%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95%E5%92%8C%20Age%20%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95.png)
+![ID 主键索引和 Age 二级索引](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/ID%20%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95%E5%92%8C%20Age%20%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95.png)
 
 所以还是跟前面一样了，先从索引页中查出来 age = 35 对应的主键 id 之后发现，SQL 中需要查询字段的 id 值已经查到了。
 
@@ -200,23 +200,23 @@ ALTER TABLE users  ADD INDEX(name);
 假设，对 name 字段加了一个普通非唯一索引，那么 name 就是索引列，同时 name 这个索引也就是单列索引。
 此时如果往表中插入三条数据，那么 name 索引的叶子节点存的数据就如下图所示
 
-![name 索引叶子节点数据](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/name%20%E7%B4%A2%E5%BC%95%E5%8F%B6%E5%AD%90%E8%8A%82%E7%82%B9%E6%95%B0%E6%8D%AE.png)
+![name 索引叶子节点数据](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/name%20%E7%B4%A2%E5%BC%95%E5%8F%B6%E5%AD%90%E8%8A%82%E7%82%B9%E6%95%B0%E6%8D%AE.png)
 
 **MySQL 会根据 name 字段的值进行排序，这里假设张三排在李四前面，当索引列的值相同时，就会根据 id 排序，所以索引实际上已经根据索引列的值排好序了。**
 
 MySQL 支持很多种排序规则，在建数据库或者是建表的时候等都可以指定排序规则。
 
-![建库时指定排序规则](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E5%BB%BA%E5%BA%93%E6%97%B6%E6%8C%87%E5%AE%9A%E6%8E%92%E5%BA%8F%E8%A7%84%E5%88%99.png)
+![建库时指定排序规则](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E5%BB%BA%E5%BA%93%E6%97%B6%E6%8C%87%E5%AE%9A%E6%8E%92%E5%BA%8F%E8%A7%84%E5%88%99.png)
 
 对于单个索引列数据查找也是跟聚簇索引一样，也会对数据分组，之后可以根据二分查找在单个索引列来查找数据。
 
 当数据不断增多，一个索引页存储不下数据的时候，也会用多个索引页来存储，并且索引页直接也会形成双向链表。
 
-![单列索引-多个索引页存储数据](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E5%8D%95%E5%88%97%E7%B4%A2%E5%BC%95-%E5%A4%9A%E4%B8%AA%E7%B4%A2%E5%BC%95%E9%A1%B5%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE.png)
+![单列索引-多个索引页存储数据](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E5%8D%95%E5%88%97%E7%B4%A2%E5%BC%95-%E5%A4%9A%E4%B8%AA%E7%B4%A2%E5%BC%95%E9%A1%B5%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE.png)
 
 当索引页不断增多是，为了方便在不同索引页中查找数据，也就会抽取一个索引页，除了存页中 id，同时也会存储这个 id 对应的索引列的值
 
-![单列索引-索引页存储对应索引列](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E5%8D%95%E5%88%97%E7%B4%A2%E5%BC%95-%E7%B4%A2%E5%BC%95%E9%A1%B5%E5%AD%98%E5%82%A8%E5%AF%B9%E5%BA%94%E7%B4%A2%E5%BC%95%E5%88%97.png)
+![单列索引-索引页存储对应索引列](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E5%8D%95%E5%88%97%E7%B4%A2%E5%BC%95-%E7%B4%A2%E5%BC%95%E9%A1%B5%E5%AD%98%E5%82%A8%E5%AF%B9%E5%BA%94%E7%B4%A2%E5%BC%95%E5%88%97.png)
 
 当数据越来越多越来越多，还会抽取，也会形成三层的一个B+树。
 
@@ -230,7 +230,7 @@ ALTER TABLE users ADD INDEX(name, age, id);
 
 比如，在 name 和 age 上建立一个联合索引，此时单个索引页就如图所示
 
-![联合索引-索引页](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95-%E7%B4%A2%E5%BC%95%E9%A1%B5.png)
+![联合索引-索引页](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95-%E7%B4%A2%E5%BC%95%E9%A1%B5.png)
 
  
 
@@ -240,7 +240,7 @@ ALTER TABLE users ADD INDEX(name, age, id);
 
 最后形成的 B+ 树简化为如下图：
 
-![联合索引-B+ Tree 结构](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95-B+%20Tree%20%E7%BB%93%E6%9E%84.png)
+![联合索引-B+ Tree 结构](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95-B+%20Tree%20%E7%BB%93%E6%9E%84.png)
 
 #### 最左前缀原则
 
@@ -290,25 +290,25 @@ ALTER TABLE users  ADD INDEX (name, age);
 ```
 
 不使用索引下推实现：
-![不使用索引下推实现模糊查询](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E4%B8%8D%E4%BD%BF%E7%94%A8%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8%E5%AE%9E%E7%8E%B0%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2.png)
+![不使用索引下推实现模糊查询](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E4%B8%8D%E4%BD%BF%E7%94%A8%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8%E5%AE%9E%E7%8E%B0%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2.png)
 
 ```sql
 -- 使用 EXPLAIN 关键字可以模拟优化器执行 SQL 查询语句，从而知道 MySQL 是如何处理 SQL 语句的。分析查询语句或是表结构的性能瓶颈
 Explain SELECT * FROM user1 WHERE name LIKE 'A%' and age = 40;
 ```
 
-![使用 EXPLAIN 分析不使用索引下推时的模糊查询](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E4%BD%BF%E7%94%A8%20EXPLAIN%20%E5%88%86%E6%9E%90%E4%B8%8D%E4%BD%BF%E7%94%A8%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8%E6%97%B6%E7%9A%84%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2.png)
+![使用 EXPLAIN 分析不使用索引下推时的模糊查询](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E4%BD%BF%E7%94%A8%20EXPLAIN%20%E5%88%86%E6%9E%90%E4%B8%8D%E4%BD%BF%E7%94%A8%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8%E6%97%B6%E7%9A%84%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2.png)
 
 使用索引下推实现
-![使用索引下推实现模糊查询](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E4%BD%BF%E7%94%A8%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8%E5%AE%9E%E7%8E%B0%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2.png)
+![使用索引下推实现模糊查询](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E4%BD%BF%E7%94%A8%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8%E5%AE%9E%E7%8E%B0%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2.png)
 
 ```sql
 Explain SELECT * FROM user1 WHERE name LIKE 'A%' and age = 40;
 ```
 
-![使用 EXPLAIN 分析使用索引下推时的模糊查询](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E4%BD%BF%E7%94%A8%20EXPLAIN%20%E5%88%86%E6%9E%90%E4%BD%BF%E7%94%A8%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8%E6%97%B6%E7%9A%84%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2.png)
+![使用 EXPLAIN 分析使用索引下推时的模糊查询](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E4%BD%BF%E7%94%A8%20EXPLAIN%20%E5%88%86%E6%9E%90%E4%BD%BF%E7%94%A8%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8%E6%97%B6%E7%9A%84%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2.png)
 
-![索引下推引入](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8%E5%BC%95%E5%85%A5.png)
+![索引下推引入](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8%E5%BC%95%E5%85%A5.png)
 
 接下来要执行如下的 SQL
 
@@ -356,7 +356,7 @@ select * from users where name = '赵六' and age= 22;
 
 查看执行计划
 
-![执行计划-年龄等于](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92-%E5%B9%B4%E9%BE%84%E7%AD%89%E4%BA%8E.png)
+![执行计划-年龄等于](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92-%E5%B9%B4%E9%BE%84%E7%AD%89%E4%BA%8E.png)
 
 type是index_merge，并且possible_key和key都是idx_name和idx_age，说明使用了索引合并，并且Extra有Using intersect(idx_age, idx_name)，intersect 就是交集的意思。
 
@@ -370,7 +370,7 @@ type是index_merge，并且possible_key和key都是idx_name和idx_age，说明�
 select * from users where name = '赵六' and age > 22;
 ```
 
-![执行计划-年龄大于](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92-%E5%B9%B4%E9%BE%84%E5%A4%A7%E4%BA%8E.png)
+![执行计划-年龄大于](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92-%E5%B9%B4%E9%BE%84%E5%A4%A7%E4%BA%8E.png)
 
 只能用 name 这个索引，因为 age > 22 查出来的 id 是无序的。
 
@@ -431,7 +431,7 @@ select * from users where name = '赵六' or age > 22;
 
 ### 优化方法
 
-![优化方法](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95.png)
+![优化方法](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95.png)
 
 关于 SQL 优化方法，包括 5 点：
 
@@ -443,7 +443,7 @@ select * from users where name = '赵六' or age > 22;
 
 ### 通过 Explain 干预执行计划
 
-![Explain 详解思维导图](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/Explain%20%E8%AF%A6%E8%A7%A3%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE.jpeg)
+![Explain 详解思维导图](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/Explain%20%E8%AF%A6%E8%A7%A3%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE.jpeg)
 
 #### Explain含义
 
@@ -529,7 +529,7 @@ MySQL 5.7 版本引入了这两个特性，直接使用 Explain 关键字可以�
 Explain select * from users;
 ```
 
-![Explain 关键字执行结果](R:/iCloudDrive/mine/ImageRepository/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/Explain%20%E5%85%B3%E9%94%AE%E5%AD%97%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.png)
+![Explain 关键字执行结果](../../../ImageRepository/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/MySQL/Explain%20%E5%85%B3%E9%94%AE%E5%AD%97%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.png)
 
 Explain 语句返回列的各列含义：
 
